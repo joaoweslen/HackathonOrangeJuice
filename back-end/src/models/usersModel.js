@@ -23,8 +23,7 @@ const findOne = async (Email) => {
 
     usersDoc.forEach(doc => users.push(doc.data()));
     const user = users.filter(user => user.email == Email);
-    //console.log(users);
-    console.log(user[0]);
+    
     return user[0];
 }
 
