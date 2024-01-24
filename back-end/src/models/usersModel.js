@@ -27,7 +27,21 @@ const findOne = async (Email) => {
     return user[0];
 }
 
+const findById = async (Id) => {
+    const usersRef =  db.collection("users");
+
+    const usersDoc = await usersRef.get();
+    
+    const users = []
+
+    usersDoc.forEach(doc => users.push(doc.data()));
+    const user = users.filter(user => user.id == Id);
+    
+    return user[0];
+}
+
 module.exports = {
     getAllUsers,
-    findOne
+    findOne,
+    findById
 };
