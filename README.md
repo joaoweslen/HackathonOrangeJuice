@@ -2,8 +2,8 @@
 
 ## comandos uteis
 
-### startup backend
-    no terminal digite: node ./back-end/src/server.js",
+### start backend
+    no terminal digite: node ./back-end/src/api/server.js ou npm start
 
-### startup backend para desenvolvimento
-    no terminal digite: nodemon ./back-end/src/server.js"
+### start backend para desenvolvimento
+    no terminal digite: nodemon ./back-end/src/api/server.js ou npm run dev
