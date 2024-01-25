@@ -1,0 +1,10 @@
+.card {
+    width: 80%;
+}
+
+.title{
+    text-align: center;
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 25px;
+}
+  
