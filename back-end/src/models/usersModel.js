@@ -9,8 +9,6 @@ const getAllUsers = async (Id) => {
     const users = []
 
     usersDoc.forEach(doc => users.push(doc.data()));
-    //const user = users.filter(user => user.id == Id);
-    //console.log(user);
     return users;
 }
 
@@ -24,21 +22,8 @@ const findOne = async (Email) => {
     usersDoc.forEach(doc => users.push(doc.data()));
     const user = users.filter(user => user.email == Email);
     
-    return user[0];
+    return user;
 }
-
-// const findById = async (Id) => {
-//     const usersRef =  db.collection("users");
-
-//     const usersDoc = await usersRef.get();
-    
-//     const users = []
-
-//     usersDoc.forEach(doc => users.push(doc.data()));
-//     const user = users.filter(user => user.id == Id);
-    
-//     return user[0];
-// }
 
 const findById = async (Id) => {
     const usersRef =  db.collection("users").doc(Id);
@@ -52,15 +37,26 @@ const findById = async (Id) => {
 }
 
 const createUsers = async (data) => {
+    const userExists = await findOne(data.email);
+    if(userExists.length) throw { status: 409 , message: "E-mail already registered" };
+
     const usersRef =  db.collection("users");
 
-    const usersDoc = await usersRef.add(data);
-    
-    const usersDocData = await findById(usersDoc.id);
-    if(!usersDocData) console.log("nãooooooooooooooo")
-    console.log(usersDocData, "MODEL AQQUUIIII")
+    const serializeUser = {
+        ...data,
+        posts: []
+    }
 
-    return {id: usersDoc.id, ...usersDocData};
+    const usersDoc = await usersRef.add(serializeUser);
+    
+    if(!usersDoc.id) throw { status: 500 , message: "error server" };
+
+    return {
+        id: usersDoc.id,
+        "email": data.email,
+        "first_name": data.first_name,
+        "last_name": data.last_name,
+    };
 }
 
 module.exports = {

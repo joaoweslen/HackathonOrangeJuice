@@ -1,10 +1,27 @@
 const Users = require('../models/usersModel');
-const errorMessage = { status: 403, message: 'Token not found' };
+const genereteToken = require("../helpers/generateToken");
+const encriptPassword = require("../helpers/encriptPassword");
+const errorMessage = { status: 403, message: 'connection server error' };
 
-const registerService = async (data) => {  
-  const userExists = await Users.createUsers(data);
+const registerService = async (data) => {
+  const passwordHash = encriptPassword(data.password);
+  const userDataforRequestDB = {
+    "first_name": data.first_name,
+    "last_name": data.last_name,
+    "email": data.email,
+    "password":passwordHash
+  }
+
+  const userExists = await Users.createUsers(userDataforRequestDB);
+  const tokenUser = await genereteToken(data);
   if (!userExists) throw errorMessage;
-  return userExists;
+  const serializeUser = {  
+    ...userExists,
+    token: tokenUser,
+    posts:[]
+  }
+
+  return serializeUser;
 };
 
 module.exports = {
