@@ -9,13 +9,15 @@ export default function Login() {
     <main>
       <div className={styles.box}>
         <FormCard title="Entre no Orange Portfólio">
-        <Link href="/" passHref>Entrar com Google</Link>
+          
+
           <form className={styles.form} action="">
-            <p>Faça login com email</p>
-            <Input type="email"/>
-            <Input type="password"/>
-            <Button>Logar</Button>
-            <Link href="/" passHref>Cadastre-se</Link>
+            <button className={styles.google}>Entrar com Google</button>
+            <p className={styles.text}>Faça login com email</p>
+            <Input type="email" placeholder="Email address"/>
+            <Input type="password" placeholder="Password"/>
+            <Button>ENTRAR</Button>
+            <Link className={styles.link} href="/cadastro" passHref>Cadastre-se</Link>
           </form>
         </FormCard>
       </div>

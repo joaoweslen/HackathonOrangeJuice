@@ -8,5 +8,20 @@
 .form{
   display: flex;
   flex-direction: column;
-  gap: 13px;
+  gap: 15px;
+}
+
+.link, .text, .google{
+  text-decoration: none;
+  color: #85878e;
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+}
+
+.google{
+  margin: auto;
+  border-radius: 5%;
+  border: 1px solid #85878e;
+  padding: 1em;
+  font-weight: 500;
+  background-color: #FFFFFF;
 }

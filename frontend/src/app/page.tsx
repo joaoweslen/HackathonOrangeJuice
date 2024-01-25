@@ -8,7 +8,7 @@ export default function page() {
           <Link href="/login" passHref>Login</Link>
         </div>
         <div>
-          <Link href="/" passHref>Cadastro</Link>
+          <Link href="/cadastro" passHref>Cadastro</Link>
         </div>
       </section>
     </main>
