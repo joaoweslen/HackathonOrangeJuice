@@ -2,8 +2,11 @@ import React from 'react';
 import Head from 'next/head';
 import BarraSuperior from '../app/BarraSuperior';
 import PerfilCard from '../app/PerfilCard';
+import BuscaTags from '../app/BuscaTags'
+import ProjetosAdicionados from '../app/ProjetosAdicionados';
 import '../assets/css/globals.css';
 import styles from "../assets/css/home.module.css";
+
 
 
 export default function Home() {
@@ -21,8 +24,10 @@ export default function Home() {
               <PerfilCard />
         </div>
         <div className={styles.BuscaProjetos}>        
-          <h3>Meus projetos</h3>
-          {/* Adicione campos de formulário, botões, etc. */}
+          <BuscaTags/>
+        </div>
+        <div className={styles.Projetos}>
+          <ProjetosAdicionados />
         </div>
       </main>
     </div>
