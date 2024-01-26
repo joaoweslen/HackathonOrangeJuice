@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
-import BarraSuperior from '../app/BarraSuperior';
-import PerfilCard from '../app/PerfilCard';
+import BarraSuperior from "../assets/components/navbar/navbar"
+import PerfilCard from '../assets/components/perfilCard/perfilCard';
 import '../assets/css/globals.css';
 import styles from "../assets/css/home.module.css";
 
