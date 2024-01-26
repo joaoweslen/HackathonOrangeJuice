@@ -1,7 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
 import BarraSuperior from '../app/BarraSuperior';
-import '../assets/css/globals.css'
+import PerfilCard from '../app/PerfilCard';
+import '../assets/css/globals.css';
+import styles from "../assets/css/home.module.css";
+
 
 export default function Home() {
   return (
@@ -14,8 +17,11 @@ export default function Home() {
         <BarraSuperior />
       </header>
       <main>
-        <div>
-          <h1>Página de Home</h1>
+        <div className={styles.Container}>
+              <PerfilCard />
+        </div>
+        <div className={styles.BuscaProjetos}>        
+          <h3>Meus projetos</h3>
           {/* Adicione campos de formulário, botões, etc. */}
         </div>
       </main>
