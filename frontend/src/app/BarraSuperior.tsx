@@ -1,6 +1,7 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
+import Link from '@mui/material/Link';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
@@ -47,7 +48,7 @@ function ResponsiveAppBar() {
   return (
     <AppBar position="static" sx={{
       width: '100%',
-      maxWidth: 1280,
+      maxWidth: 1800,
       height: 73,
       display: 'flex',
       justifyContent: 'center',
@@ -59,7 +60,7 @@ function ResponsiveAppBar() {
         <Toolbar disableGutters 
         sx={{
           width: '100%',
-          maxWidth: 1216,
+          maxWidth: 1300,
           height: 41, 
           display:'flex',
           justifyContent: 'space-between' 
@@ -97,17 +98,27 @@ function ResponsiveAppBar() {
               >
                 {pages.map((page) => (
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
+                    <Typography textAlign="center" sx={{
+      width: '100%',
+      maxWidth: 1800,
+      height: 73,
+      display: 'flex',
+      justifyContent: 'center',
+      padding: '16px 30px',
+      backgroundColor: '#111133'
+    }}>{page}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
             </Box>
 
+            <Link href="/home">
             <img
               src="/Logo-orange.svg"
               alt="Logo"
               style={{ height: '40px', width: 'auto', marginRight: '8px' }}
             />
+            </Link>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {pages.map((page) => (
@@ -158,6 +169,8 @@ function ResponsiveAppBar() {
 }
 
 export default ResponsiveAppBar;
+
+
 
 
 
