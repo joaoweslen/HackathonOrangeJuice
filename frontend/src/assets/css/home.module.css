@@ -6,5 +6,9 @@
 
 .BuscaProjetos{
   margin-top: 100px;
-  border: solid 1px red;
-}  
+  margin-left: 5vh;
+}
+
+.Projetos{
+  margin: 5vh;
+}
