@@ -13,9 +13,13 @@ const login = async (email, password) => {
   
   if (passwordHash !== user[0].password) throw errorMessagePassword;
 
-  const token = generateToken({ id: user.id, name: user.fist_name, email: user.email });
+  const selializeUserData = {
+    id: user[0].id, first_name: user[0].first_name, last_name: user[0].last_name, email: user[0].email 
+  }
 
-  return token;
+  const token = await generateToken(selializeUserData);
+
+  return {token: token, ...selializeUserData};
 };
 
 module.exports = {

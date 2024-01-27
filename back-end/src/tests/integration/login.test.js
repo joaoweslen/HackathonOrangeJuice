@@ -113,7 +113,10 @@ describe("testando rota de login", () => {
             
       expect(response.status).to.equal(200);
       expect(response.body).to.have.property("token");
-            
+      expect(response.body).to.have.property("first_name");
+      expect(response.body).to.have.property("last_name");
+      expect(response.body).to.have.property("first_name");
+      expect(response.body).to.have.property("email");    
     });
   });
 });
