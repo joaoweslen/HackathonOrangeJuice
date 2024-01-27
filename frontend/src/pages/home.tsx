@@ -1,9 +1,9 @@
 import React from 'react';
 import Head from 'next/head';
-import BarraSuperior from '../app/BarraSuperior';
-import PerfilCard from '../app/PerfilCard';
-import BuscaTags from '../app/BuscaTags'
-import ProjetosAdicionados from '../app/ProjetosAdicionados';
+import BarraSuperior from '../assets/components/navbar/BarraSuperior';
+import PerfilCard from '../assets/components/perfilCard/PerfilCard';
+import BuscaTags from '../assets/components/buscarTags/BuscaTags'
+import ProjetosAdicionados from '../assets/components/containerProjetos/ProjetosAdicionados';
 import '../assets/css/globals.css';
 import styles from "../assets/css/home.module.css";
 
