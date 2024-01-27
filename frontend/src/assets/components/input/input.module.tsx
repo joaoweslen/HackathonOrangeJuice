@@ -6,7 +6,6 @@ export default function Input(props:any) {
       // <input className={styles.input}  />
       <TextField
         {...props}
-        autoFocus
       />
     );
 }

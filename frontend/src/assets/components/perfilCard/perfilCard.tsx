@@ -32,7 +32,7 @@ export default function MultiActionAreaCard() {
         </CardContent>
 
         <CardActionArea>
-          <Button disabled
+          <Button
             variant="contained"
             href="#contained-buttons"
             color="primary"

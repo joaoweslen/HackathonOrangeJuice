@@ -31,9 +31,9 @@ export default function Password(props:any) {
                 {showPassword ? <VisibilityOff /> : <Visibility />}
               </IconButton>
             </InputAdornment>
-          }
-          {...props}
-        />
-    </FormControl>
+              }
+            {...props}
+            />
+      </FormControl>
     );
 }
