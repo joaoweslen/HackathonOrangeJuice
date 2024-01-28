@@ -48,7 +48,8 @@ const createUsers = async (data) => {
     }
 
     const usersDoc = await usersRef.add(serializeUser);
-    
+    console.log(usersDoc.id);
+
     if(!usersDoc.id) throw { status: 500 , message: "error server" };
 
     return {

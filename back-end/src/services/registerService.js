@@ -1,9 +1,13 @@
 const Users = require('../models/usersModel');
 const genereteToken = require("../helpers/generateToken");
 const encriptPassword = require("../helpers/encriptPassword");
+const joi = require("../joi");
 const errorMessage = { status: 403, message: 'connection server error' };
 
 const registerService = async (data) => {
+  const bodyIsValid = joi.validateSchema(data, joi.registerSchema);
+  if (bodyIsValid) throw { status: 403, message: bodyIsValid } 
+
   const passwordHash = encriptPassword(data.password);
   const userDataforRequestDB = {
     "first_name": data.first_name,
