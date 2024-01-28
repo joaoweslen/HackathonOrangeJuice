@@ -1,13 +1,17 @@
 const express = require("express");
+const cors = require('cors');
 const app = express();
 
 require('express-async-errors');
 
 app.use(express.json());
+
 const routes = require('../routes');
 const httpErrorMiddleware = require('../middlewares/httpErrorMiddleware');
 
 const usersModel = require('../models/usersModel');
+
+app.use(cors({origin: 'http://localhost:3000'}));
 
 // rota get /teste pra teste api
 app.get('/teste', (req, res) => res.status(200).json({ message: 'Olá Mundo! teste' }));
@@ -25,6 +29,7 @@ app.get('/users', async (req, res) => {
 //         res.status(200).json(usersData);
 //     }
 //);
+
 
 app.use(routes);
 app.use(httpErrorMiddleware);

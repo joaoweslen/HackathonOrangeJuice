@@ -20,6 +20,8 @@ export default function Password(props:any) {
         <OutlinedInput
           id="outlined-adornment-password"
           type={showPassword ? 'text' : 'password'}
+          value={props.password}
+          onChange={(e) => props.setPassword(e.target.value)}
           endAdornment={
             <InputAdornment position="end">
               <IconButton

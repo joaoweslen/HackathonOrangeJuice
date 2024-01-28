@@ -29,7 +29,7 @@ export default function Cadastro() {
                   <div className={styles.form}>
                     <Input name="email"  label="Email Address" type="email" id="email" autoFocus/>
                     <Password name="password" label="Password" id="password"/>
-                    <Button>CADASTRAR</Button>
+                    <Button type="submit" value="CADASTRAR"/>
                   </div>
                   
                 </form>
