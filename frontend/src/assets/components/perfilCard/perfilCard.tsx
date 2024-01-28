@@ -3,11 +3,12 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import FormProject from "../formProject/formProject.module";
 import { Button, CardActionArea, CardActions } from "@mui/material";
 
 export default function MultiActionAreaCard() {
   return (
-    <Card sx={{ height: 122,width: 375, maxWidth: 375, display: "flex", gap: 5, padding: 0 }}>
+    <Card elevation={0} sx={{ height: 122,width: 375, maxWidth: 375, display: "flex", gap: 5, padding: 0 }}>
       <CardActionArea sx={{ width: 122, maxWidth: 122 }}>
         <CardMedia
           component="img"
@@ -32,14 +33,7 @@ export default function MultiActionAreaCard() {
         </CardContent>
 
         <CardActionArea>
-          <Button disabled
-            variant="contained"
-            href="#contained-buttons"
-            color="primary"
-            size="large"
-          >
-            ADICIONAR PROJETO
-          </Button>
+          <FormProject/>
         </CardActionArea>
       </CardContent>
     </Card>

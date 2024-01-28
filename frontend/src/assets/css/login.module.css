@@ -1,8 +1,12 @@
+.body{
+  margin: 0;
+  padding: 0;
+}
+
 .box{
   min-height: 90vh;
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .form{
@@ -22,17 +26,45 @@
 }
 
 .google{
-  border: none;
   margin: auto;
+  border: none;
   border-radius: 0.2em;
   padding: 1em;
   font-weight: 550;
   font-size: 94%;
   background-color: #FFFFFF;
-  box-shadow: 0.1rem 0.1rem 0.2rem #85878e;
+  box-shadow: 0px 1px 1px #c1c2c7;
   cursor: pointer;
 }
 
 .google:hover{
   background-color: #f9f9f9;
+}
+.div_img{
+  display: inline-block;
+  margin: 0;
+}
+.img{
+    position: fixed;
+    width: 40%;
+    margin-top: -4%;
+}
+
+@media (min-width: 780px) {
+  .box{
+    max-width: 80vw;
+    margin-left: 46%;
+  }
+  .form{
+    width: rem;
+  }
+}
+
+@media (max-width: 780px) {
+  .box{
+    justify-content: center;
+  }
+  .div_img{
+    display: none;
+  }  
 }
