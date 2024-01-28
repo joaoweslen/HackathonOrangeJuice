@@ -4,6 +4,7 @@ import BarraSuperior from '../assets/components/navbar/BarraSuperior';
 import PerfilCard from '../assets/components/perfilCard/perfilCard';
 import BuscaTags from '../assets/components/buscarTags/BuscaTags'
 import ProjetosAdicionados from '../assets/components/containerProjetos/ProjetosAdicionados';
+import '@fontsource/roboto/300.css';
 import '../assets/css/globals.css';
 import styles from "../assets/css/home.module.css";
 
@@ -21,7 +22,8 @@ export default function Home() {
         <div className={styles.Container}>
               <PerfilCard />
         </div>
-        <div className={styles.BuscaProjetos}>        
+        <div className={styles.BuscaProjetos}>  
+          <div className={styles.tituloProjetos}>Meus projetos</div>      
           <BuscaTags/>
         </div>
         <div className={styles.Projetos}>
@@ -31,4 +33,3 @@ export default function Home() {
     </div>
   );
 }
-
