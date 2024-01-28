@@ -1,4 +1,4 @@
-const connection = require("./connection/connection");
+const { connection } = require("./connection/connection");
 const db = connection.firestore();
 
 const getAllUsers = async (Id) => {
