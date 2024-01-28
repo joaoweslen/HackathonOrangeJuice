@@ -21,9 +21,10 @@ export default function Login() {
     [email, password]
     );
 
-    function requestAPI(){
+    async function requestAPI(){
       const userData = {email,password}
-      // const result = requestPOST('/login',JSON.parse(userData))
+      const result = await requestPOST({route: '/login', body: {email, password}});
+      console.log(result);
     };
 
     return (
@@ -43,13 +44,14 @@ export default function Login() {
                     src={Google}
                     alt="Logo da empresa Google" 
                     style={{ width:'auto', height:'1.3rem', marginRight: '1.7em', marginBottom:'-0.4em'}}
+                     
                   />
                   Entrar com Google
                 </button>
                 <p className={styles.text}>Faça login com email</p>
                 <Input name="email" label="Email Address" type="email" id="email" email={email} setEmail={setEmail} autoFocus/>
                 <Password name="password" label="Password" id="password" password={password} setPassword={setPassword}/>
-                <Button type="submit" value="ENTRAR"/>
+                <Button type="submit" value="ENTRAR" onClick={() => requestAPI()}/>
                 <Link className={styles.link} href="/cadastro" passHref>Cadastre-se</Link>
               </div>
             </FormCard>
