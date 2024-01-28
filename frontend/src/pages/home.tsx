@@ -7,8 +7,6 @@ import ProjetosAdicionados from '../assets/components/containerProjetos/Projetos
 import '../assets/css/globals.css';
 import styles from "../assets/css/home.module.css";
 
-
-
 export default function Home() {
   return (
     <div>

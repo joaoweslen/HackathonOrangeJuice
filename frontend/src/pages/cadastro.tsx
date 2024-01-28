@@ -4,6 +4,7 @@ import Input from "@/assets/components/input/input.module";
 import Password from "@/assets/components/input/password.module";
 import Button from "@/assets/components/button/button.module";
 import cadas_img from "@/assets/img/img_cadastro.jpg"
+import '../assets/css/globals.css';
 import Imagem from 'next/image'
 
 export default function Cadastro() {

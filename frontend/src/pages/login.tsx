@@ -7,6 +7,7 @@ import Link from 'next/link';
 import Google from "@/assets/img/lg_google.png"
 import login_img from "@/assets/img/img_login.jpg"
 import Imagem from 'next/image'
+import '../assets/css/globals.css';
 
 export default function Login() {
     return (

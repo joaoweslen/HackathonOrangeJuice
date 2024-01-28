@@ -47,14 +47,13 @@
 .img{
     position: fixed;
     width: 40%;
-
-    margin-top: -4rem;
+    margin-top: -4%;
 }
 
 @media (min-width: 780px) {
   .box{
     max-width: 80vw;
-    margin-left: 45%;
+    margin-left: 46%;
   }
   .form{
     width: rem;

@@ -1,17 +1,17 @@
 .card {
-    width: 75%;
+    width: 73%;
 }
 
 .title{
     text-align: center;
     font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-    font-size: 160%;
+    font-size: 158%;
 }
 
 
 @media (min-width: 800px) {
     .title{
-        font-size: 3.1rem;
+        font-size: 3rem;
     }  
 }
 
