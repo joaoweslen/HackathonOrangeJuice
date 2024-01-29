@@ -19,7 +19,7 @@ export default function Home() {
       </header>
       <main>
         <div className={styles.Container}>
-              <PerfilCard />
+          <PerfilCard />
         </div>
         <div className={styles.BuscaProjetos}>        
           <h3>Meus projetos</h3>

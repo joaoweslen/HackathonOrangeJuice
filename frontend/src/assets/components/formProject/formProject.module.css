@@ -1,8 +1,41 @@
-.button {
+.button, .btn_save {
     background-color: #FF5522;
     box-shadow: none;
 }
 
-.button:hover {
+.button:hover, .btn_save:hover {
     background-color: #e84514;
+}
+
+.btn_close {
+    color: #878787;
+    margin-left: 2%;
+    background-color: #d6d5d5;
+    box-shadow: none;
+}
+
+.btn_close:hover {
+    background-color: #b9b9b9;
+}
+
+.box_btn{
+    margin-top: 2%;
+}
+
+.link{
+    text-decoration: none;
+    color: #464646;
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+}
+
+.link:hover{
+    text-decoration: underline;
+}
+
+.img{
+    width: 25rem;
+    height: 19rem;
+    cursor: pointer;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
