@@ -10,7 +10,6 @@ export default function FullWidthTextField() {
         maxWidth: '100%',
       }}
     >
-
       <TextField fullWidth label="Buscar tags" id="fullWidth" />
     </Box>
   );
