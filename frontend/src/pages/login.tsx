@@ -77,7 +77,8 @@ export default function Login() {
         <div className={styles.div_img}>
               <Imagem className={styles.img}
                 src={login_img}
-                alt="Logo da empresa Google" 
+                alt="Imagem cartoon de três pessoas adicionando imagens diretamente 
+                com aa mãos num monito gigante " 
               />
             </div>
           <div className={styles.box}>
