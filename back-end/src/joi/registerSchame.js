@@ -7,23 +7,23 @@ const registerSchema = Joi.object({
   password: Joi.string().min(6).required(),
 });
 
-function validateTest(listSales, schema) {
-  const { error } = schema.validate(listSales);
-  if (!error) return false;
-  return error.details[0].message;
-}
+// function validateTest(listSales, schema) {
+//   const { error } = schema.validate(listSales);
+//   if (!error) return false;
+//   return error.details[0].message;
+// }
 
-console.log(
-  validateTest(
-    {
-      first_name: 'eliel ',
-      last_name: 'lindo',
-      email: 'trybe@trybe.com',
-      password: '12346567',
-      a:"a"
-    },    
-    registerSchema,
-),
-);
+// console.log(
+//   validateTest(
+//     {
+//       first_name: 'eliel ',
+//       last_name: 'lindo',
+//       email: 'trybe@trybe.com',
+//       password: '12346567',
+//       a:"a"
+//     },    
+//     registerSchema,
+// ),
+// );
 
 module.exports = registerSchema;

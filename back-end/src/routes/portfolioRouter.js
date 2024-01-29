@@ -10,7 +10,7 @@ const portfolioController = require('../controllers/portfolioController')
 
 const portfolioRouter = Router();
 
-portfolioRouter.post('/', Multer.single("image"), uploadImage, portfolioController.register);
+// portfolioRouter.post('/', Multer.single("image"), uploadImage, portfolioController.register);
 portfolioRouter.get('/', portfolioController.getAll);
 portfolioRouter.get('/:id', portfolioController.findById);
 portfolioRouter.put('/:id', portfolioController.updateById);
