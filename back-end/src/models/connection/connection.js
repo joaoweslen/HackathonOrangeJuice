@@ -1,6 +1,6 @@
 const connection = require("firebase-admin");
 
-const serviceAccount = require("./squad-30-hackathon-firebase-adminsdk-b4yh9-c4dcdeca8a.json");
+const serviceAccount = require("./hackathon-90ee4-firebase-adminsdk-ww7bm-8a124004b8.json");
 
 const BUCKET = "squad-30-hackathon.appspot.com";
 
@@ -9,37 +9,37 @@ connection.initializeApp({
   storageBucket: BUCKET,
 });
 
-const bucket = connection.storage().bucket();
+// const bucket = connection.storage().bucket();
 
-const uploadImage = (req, res, next) => {
+// const uploadImage = (req, res, next) => {
 
-  const image = req.file;
-  const nomeArquivo = Date.now() + "." + image.originalname;
+//   const image = req.file;
+//   const nomeArquivo = Date.now() + "." + image.originalname;
 
-  const file = bucket.file("imagens/" + nomeArquivo);
+//   const file = bucket.file("imagens/" + nomeArquivo);
 
-  const stream = file.createWriteStream({
-    metadata: {
-      contentType: image.mimetype
-    }
-  });
+//   const stream = file.createWriteStream({
+//     metadata: {
+//       contentType: image.mimetype
+//     }
+//   });
 
-  stream.on("error", (e) => {
-    console.error(e);
-  })
+//   stream.on("error", (e) => {
+//     console.error(e);
+//   })
 
-  stream.on("finish", async () => {
-    await file.makePublic();
+//   stream.on("finish", async () => {
+//     await file.makePublic();
 
-    req.file.firebaseUrl = `https://storage.googleapis.com/${BUCKET}/imagens/${nomeArquivo}`;
+//     req.file.firebaseUrl = `https://storage.googleapis.com/${BUCKET}/imagens/${nomeArquivo}`;
 
-    next();
-  })
+//     next();
+//   })
 
-  stream.end(image.buffer);
-};
+//   stream.end(image.buffer);
+// };
 
 module.exports = {
   connection,
-  uploadImage
+  // uploadImage
 };

@@ -1,12 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
-import BarraSuperior from '../assets/components/navbar/BarraSuperior';
+import BarraSuperior from "../assets/components/navbar/navbar"
 import PerfilCard from '../assets/components/perfilCard/perfilCard';
-import BuscaTags from '../assets/components/buscarTags/BuscaTags'
-import ProjetosAdicionados from '../assets/components/containerProjetos/ProjetosAdicionados';
-import '@fontsource/roboto/300.css';
 import '../assets/css/globals.css';
 import styles from "../assets/css/home.module.css";
+
 
 export default function Home() {
   return (
@@ -22,14 +20,12 @@ export default function Home() {
         <div className={styles.Container}>
               <PerfilCard />
         </div>
-        <div className={styles.BuscaProjetos}>  
-          <div className={styles.tituloProjetos}>Meus projetos</div>      
-          <BuscaTags/>
-        </div>
-        <div className={styles.Projetos}>
-          <ProjetosAdicionados />
+        <div className={styles.BuscaProjetos}>        
+          <h3>Meus projetos</h3>
+          {/* Adicione campos de formulário, botões, etc. */}
         </div>
       </main>
     </div>
   );
 }
+

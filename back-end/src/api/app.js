@@ -1,8 +1,10 @@
 const express = require("express");
+const cors = require('cors');
 const app = express();
 
 require('express-async-errors'); 
 
+app.use(cors({origin: 'http://localhost:3000'}));
 app.use(express.json());
 const routes = require('../routes');
 const httpErrorMiddleware = require('../middlewares/httpErrorMiddleware');
