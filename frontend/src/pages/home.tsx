@@ -1,7 +1,8 @@
 import React from 'react';
 import Head from 'next/head';
-import BarraSuperior from "../assets/components/navbar/navbar"
+import BarraSuperior from "../assets/components/navbar/navbar";
 import PerfilCard from '../assets/components/perfilCard/perfilCard';
+import ContainerProjetos from '../assets/components/containerProjetos/ProjetosAdicionados';
 import '../assets/css/globals.css';
 import styles from "../assets/css/home.module.css";
 
@@ -22,7 +23,7 @@ export default function Home() {
         </div>
         <div className={styles.BuscaProjetos}>        
           <h3>Meus projetos</h3>
-          {/* Adicione campos de formulário, botões, etc. */}
+          <ContainerProjetos />
         </div>
       </main>
     </div>
