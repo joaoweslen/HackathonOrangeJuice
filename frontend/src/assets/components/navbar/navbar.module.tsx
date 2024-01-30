@@ -1,9 +1,11 @@
 import * as React from "react";
 import Link from "next/link";
 import styles from "./navbar.module.css"
-import {AppBar, Toolbar, Box, Button, IconButton, Tooltip, Avatar, Menu, 
+import {AppBar, Toolbar, Box, IconButton, Tooltip, Avatar, Menu, 
     MenuList, MenuItem} from "@mui/material";
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import AccountIcon from '@mui/icons-material/AccountCircle';
+import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
 
 export default function NavBar() {
@@ -57,13 +59,11 @@ export default function NavBar() {
                 </Box>
 
                 <Box sx={{flexGrow:1,display:{xs:'flex', md:'none'}}}>
-                    <Link href="/home">
-                        <img
-                            src="/Logo-orange.svg"
-                            alt="Logo Orage Juice"
-                            style={{width: "auto"}}
-                        />
-                    </Link>
+                    <img
+                        src="/Logo-orange.svg"
+                        alt="Logo Orage Juice"
+                        style={{width: "auto"}}
+                    />
                 </Box>
                 
                 <Box>
@@ -77,8 +77,9 @@ export default function NavBar() {
                         open={Boolean(anchorElUser)} 
                         onClose={handleCloseUser} >
                         <MenuList>
-                            <Link href="/" className={styles.linkMenu}><MenuItem>Profile</MenuItem></Link>
-                            <Link href="/" className={styles.linkMenu}><MenuItem>Logout</MenuItem></Link>
+
+                            <Link href="/" className={styles.linkMenu}><MenuItem><AccountIcon/>Profile</MenuItem></Link>
+                            <Link href="/" className={styles.linkMenu}><MenuItem><LogoutIcon/>Logout</MenuItem></Link>
                         </MenuList>
                     </Menu>
                     <IconButton color="inherit">
