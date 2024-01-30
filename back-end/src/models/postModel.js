@@ -1,14 +1,42 @@
-const { connection } = require("./connection/connection");
+const { response } = require("express");
+const { connection, BUCKET } = require("./connection/connection");
 const db = connection.firestore();
 
-const multer = require('multer')
-const Multer = multer({
-    storage: multer.memoryStorage()
-})
+const uploadImage = async (req, res, next)  => {
+    const bucket = connection.storage().bucket()
+    
+    const image = req.file;
+
+    const fileName = Date.now() + "." + image.originalname;
+  
+    const file = bucket.file("images/" + fileName);
+
+    console.log(file)
+
+    const stream = file.createWriteStream({
+      metadata: {
+        contentType: image.mimetype
+      }
+    });
+  
+    stream.on("error", (e) => {
+      console.error(e);
+    })
+  
+    stream.on("finish", async () => {
+      await file.makePublic();
+  
+      req.file.firebaseUrl = `https://storage.googleapis.com/${BUCKET}/images/${fileName}`;
+  
+      next();
+    })
+  
+    stream.end(image.buffer);
+  };
 
 
 const createPost = async (data) => {
-    const id = crypto.randomUUID();
+    const id = crypto.randomUUID()+Date.now();
     const postRef = db.collection("posts").doc(id);
     
     const { firebaseUrl } = data.file;
@@ -32,7 +60,7 @@ const getAllPosts = async (data) => {
     const postsDoc = await postsRef.get();
 
     let postArr = [];
-    postDoc.forEach (doc => {
+    postsDoc.forEach (doc => {
         postArr.push(doc.data());
     });
 
@@ -55,9 +83,14 @@ const updateById = async (id, data) => {
 }
 
 const deleteById = async (id) => {
-    const postRef = await db.collection("posts").doc(id).delete();
+    const data = await getById(id);
+    const imageUrl = data.image;
+    console.log(imageUrl)
 
-    return postRef;
+    db.collection("posts").doc(id).delete();
+    connection.storage().bucket(imageUrl).deleteFiles();
+
+    return response.status(204);
 }
 
 module.exports = {
@@ -66,5 +99,6 @@ module.exports = {
     getAllPosts,
     getById,
     updateById,
-    deleteById
+    deleteById,
+    uploadImage
 }

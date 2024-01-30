@@ -1,7 +1,6 @@
 const portfolioService = require('../services/portfolioService');
 
 const register = async(req, res) => {
-
     const portfolioDoc = await portfolioService.registerService(req);
     console.log(portfolioDoc.id)
     res.status(200).json(portfolioDoc);
