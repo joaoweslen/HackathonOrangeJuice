@@ -22,11 +22,12 @@ export default function Login() {
     const [faledTryLogin, setFaledTryLogin] = useState(false);
     const [isLoged, setIsLoged] = useState(false);
     
-    
+    const minCharacterPassword = 6;
+    const regex = /\S+@\S+\.\S+/;
 
     useEffect(() => {
         setFaledTryLogin(false);
-        console.log(email,password)
+        //console.log(email,password)
       },
       [email, password]
     );
@@ -51,7 +52,7 @@ export default function Login() {
         localStorage.setItem('data', JSON.stringify(respnseAPI));
         setIsLoged(true);
 
-        console.log(respnseAPI);
+        //console.log(respnseAPI);
       } catch (e) {
         setFaledTryLogin(true);
         setIsLoged(false);
@@ -102,8 +103,6 @@ export default function Login() {
                   label="Email Address" 
                   type="email" 
                   id="email" 
-                  // email={email} 
-                  // setEmail={setEmail}
                   inputValue={email} 
                   functionEdicion={setEmail} 
                   autoFocus
@@ -112,12 +111,15 @@ export default function Login() {
                   name="password" 
                   label="Password" 
                   id="password" 
-                  // password={password} 
-                  // setPassword={setPassword}
                   inputValue={password} 
                   functionEdicion={setPassword} 
                 />
-                <Button type="submit" value="ENTRAR" onClick={() => butonLogin()}/>
+                <Button 
+                  type="submit" 
+                  value="ENTRAR"
+                  Email={email}
+                  Password={password}
+                  onClick={() => butonLogin()}/>
                 <Link className={styles.link} href="/cadastro" passHref>Cadastre-se</Link>
               </div>
             </FormCard>

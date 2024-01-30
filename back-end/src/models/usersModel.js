@@ -1,5 +1,9 @@
 const { connection } = require("./connection/connection");
 const db = connection.firestore();
+//const md5 = require("../helpers/encriptPassword");
+//const e = require("express");
+const uuid = require('uuid');
+
 
 const getAllUsers = async (Id) => {
     const usersRef =  db.collection("users");
@@ -37,26 +41,42 @@ const findById = async (Id) => {
 }
 
 const createUsers = async (data) => {
-    const userExists = await findOne(data.email);
+    const {last_name, email, password,first_name} = data;
+    const userExists = await findOne(email);
     if(userExists.length) throw { status: 409 , message: "E-mail already registered" };
 
-    const usersRef =  db.collection("users");
+    const id = uuid.v4();
+    
+    const usersRef =  db.collection("users").doc(id);
 
     const serializeUser = {
-        ...data,
+        id,
+        last_name,
+        email,
+        password,
+        first_name,
         posts: []
     }
 
-    const usersDoc = await usersRef.add(serializeUser);
-    console.log(usersDoc.id);
+    await usersRef.set(serializeUser, { merge: true })
+    .then(() => {
+        console.log('Atualização bem-sucedida');
+      })
+      .catch(error => {
+        console.error('Erro ao atualizar:', error);
+      });
 
-    if(!usersDoc.id) throw { status: 500 , message: "error server" };
+    const usersDoc = await usersRef.get(id);
+    //if(!usersDoc.id) throw { status: 500 , message: "error server" };
+    const dataResponseDb = usersDoc.data()
+    console.log(usersDoc.data());
 
     return {
-        id: usersDoc.id,
-        "email": data.email,
-        "first_name": data.first_name,
-        "last_name": data.last_name,
+        id,
+        "email": dataResponseDb.email,
+        "first_name": dataResponseDb.first_name,
+        "last_name": dataResponseDb.last_name,
+        posts: dataResponseDb.posts
     };
 }
 
