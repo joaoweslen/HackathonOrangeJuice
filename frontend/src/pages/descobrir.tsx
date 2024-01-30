@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import DescobrirProjetos from '../assets/components/DescobrirProjetos/DescobrirProjetos'
+import ProjectCard from '../assets/components/containerProjetos/projectContainer.module'
 import BuscaTags from '../assets/components/buscarTags/BuscaTags'
 import Navbar from "../assets/components/navbar/navbar.module";
 import styles from "../assets/css/descobrir.module.css";
@@ -27,7 +28,7 @@ export default function Descobrir() {
         </div>
 
         <div>
-          <DescobrirProjetos/> 
+          <ProjectCard/>
         </div>
         
       </main>

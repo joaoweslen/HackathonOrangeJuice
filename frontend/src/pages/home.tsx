@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Navbar from "../assets/components/navbar/navbar.module";
 import PerfilCard from '../assets/components/perfilCard/perfilCard';
 import Seach from '../assets/components/buscarTags/BuscaTags';
-import ContainerProjetos from '../assets/components/containerProjetos/ProjetosAdicionados';
+import ProjectCard from '../assets/components/containerProjetos/projectContainer.module';
 import '../assets/css/globals.css';
 import styles from "../assets/css/home.module.css";
 
@@ -25,7 +25,8 @@ export default function Home() {
         <div className={styles.BuscaProjetos}>        
           <h3 className={styles.title}>Meus projetos</h3>
           <Seach/>
-          <ContainerProjetos />
+          {/* <ContainerProjetos/> */}
+          <ProjectCard/>
         </div>
       </main>
     </div>
