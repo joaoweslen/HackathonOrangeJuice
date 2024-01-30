@@ -1,10 +1,7 @@
 import * as React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
 import FormProject from "../formProject/formProject.module";
-import { CardActionArea } from "@mui/material";
+import styles  from "./perfilCard.module.css";
+import { Card, CardContent, CardActionArea, CardMedia, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 
 export default function MultiActionAreaCard() {
@@ -32,33 +29,25 @@ export default function MultiActionAreaCard() {
 
     return (
         <Card elevation={0} sx={{
-            height: 122,
-            width: 375,
-            maxWidth: 375,
-            display: "flex",
-            gap: 5,
+            display:{xs:'unset',md:'flex'},
+            gap: 4,
             padding: 0
         }}>
-            <CardActionArea sx={{ width: 122, maxWidth: 122 }}>
-                <CardMedia
+            <CardActionArea sx={{ width:122, maxWidth: 122 }}>
+                <CardMedia className={styles.img}
                     component="img"
-                    style={{
-                        width: "122px",
-                        height: "122px",
-                        borderRadius: "50%",
-                    }}
                     image="/Circle.svg"
                     alt="Perfil Usuário"
                 />
             </CardActionArea>
 
             <CardContent sx={{ padding: 0 }}>
-                <CardContent sx={{ padding: 0, marginBottom: 2 }}>
+                <CardContent sx={{ padding: 0, marginBottom: "6%" }}>
                     <Typography gutterBottom variant="h5" component="div">
                         {fullName}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        {local}
+                        Brasil{/* {local} */}
                     </Typography>
                 </CardContent>
 

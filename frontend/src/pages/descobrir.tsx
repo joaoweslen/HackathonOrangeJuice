@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import DescobrirProjetos from '../assets/components/DescobrirProjetos/DescobrirProjetos'
 import ProjectCard from '../assets/components/containerProjetos/projectContainer.module'
-import BuscaTags from '../assets/components/buscarTags/BuscaTags'
+import BuscaTags from '../assets/components/buscarTags/buscaTags.module'
 import Navbar from "../assets/components/navbar/navbar.module";
 import styles from "../assets/css/descobrir.module.css";
 import '@fontsource/roboto/300.css';
@@ -28,7 +28,7 @@ export default function Descobrir() {
         </div>
 
         <div>
-          <ProjectCard/>
+          {/* <ProjectCard/> */}
         </div>
         
       </main>
