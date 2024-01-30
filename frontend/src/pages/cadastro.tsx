@@ -30,7 +30,7 @@ export default function Cadastro() {
         const reponseAPI = await requestPOST({
           route: '/register',
           body: {
-            first_Name: firstName,
+            first_name: firstName,
             last_name: lastName,
             email,
             password
@@ -94,6 +94,8 @@ export default function Cadastro() {
                     <Button 
                       type="submit" 
                       value="CADASTRAR"
+                      Password={password}
+                      Email={email}
                       onClick={() => buttonRegister()}
                     />
                   </div>
