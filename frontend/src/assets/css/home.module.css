@@ -17,3 +17,9 @@
   color: #94969b;
   font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
+@media (max-width: 899px) {
+  .Container{
+    margin-top: 5%;
+  }
+}

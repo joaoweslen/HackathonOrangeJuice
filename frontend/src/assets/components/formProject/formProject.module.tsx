@@ -85,8 +85,7 @@ export default function FormProject() {
                       <Input sx={{width: '100%'}}  name="" label="Descrição" type="text" id="" multiline rows={4}/>
                     </Grid>
                   </Grid>
-                </Grid>
-                
+                </Grid>  
             </Grid>
 
             <div>
