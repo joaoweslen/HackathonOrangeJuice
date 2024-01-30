@@ -14,7 +14,7 @@ const usersModel = require('../models/usersModel');
 // rota get /teste pra teste api
 app.get('/teste', (req, res) => res.status(200).json({ message: 'Olá Mundo! teste' }));
 
-// rota get /users pra teste de conexão com o firebase
+// rota get /users pra teste de conexão com o firebase //
 app.get('/users', async (req, res) => {
     const users = await usersModel.getAllUsers("vzNf9vPRE1m2Yx2kRStB");
     res.status(200).json(users)
