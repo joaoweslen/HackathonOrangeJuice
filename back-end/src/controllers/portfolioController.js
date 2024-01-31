@@ -26,8 +26,8 @@ const findByPostsId = async (req, res) => {
 };
 
 const findByOwnerId = async (req, res) => {
+    console.log(req.id)
     const portfolio = await portfolioService.getByOwnerIdService(req.id);
-    console.log(portfolio, "Controlerr");
     res.status(200).send(portfolio);
 };
 
@@ -38,7 +38,8 @@ const updateById = async (req, res) => {
 };
 
 const deleteById = async (req, res) => {
-    const response = await portfolioService.deleteByIdService(req.params.id);
+    const ownerId = req.id;
+    const response = await portfolioService.deleteByIdService(req.params.id, ownerId);
     res.send(response);
 };
 

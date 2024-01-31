@@ -52,6 +52,7 @@ const createPost = async (userName, title, tags, url, imageUrl, description, own
         "url": url,
         "image": imageUrl, 
         "description": description,
+        "ownerId": ownerId
     }
     await postRef.set(postToUpload);
     userRef.update({
@@ -107,13 +108,18 @@ const updateById = async (id, data) => {
     return(postDoc.data());
 }
 
-const deleteById = async (id) => {
+const deleteById = async (id, ownerId) => {
     const data = await getById(id);
     const imageUrl = data.image;
-    console.log(imageUrl)
+    const startIndex = imageUrl.indexOf("/images/") + "/images/".length
+    const filePath = imageUrl.substring(startIndex);
+    const userRef = db.collection("users").doc(ownerId);
 
-    // db.collection("posts").doc(id).delete();
-    connection.storage().bucket().file(imageUrl).delete();
+    db.collection("posts").doc(id).delete();
+    connection.storage().bucket().file("images/" + filePath).delete();
+    userRef.update({
+      ['posts']: connection.firestore.FieldValue.arrayRemove(id)
+    })
 
     return response.status(204);
 }
