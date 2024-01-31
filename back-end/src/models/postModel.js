@@ -126,6 +126,6 @@ module.exports = {
     updateById,
     deleteById,
     uploadImage,
-    getPostsForIdUser
+    getPostsForIdUser,
     uploadImage
 }

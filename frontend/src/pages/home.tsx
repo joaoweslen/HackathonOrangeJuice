@@ -26,8 +26,7 @@ export default function Home() {
         <div className={styles.BuscaProjetos}>        
           <h3 className={styles.title}>Meus projetos</h3>
           <Seach/>
-          {/* <ContainerProjetos/> */}
-          <ProjectCard/>
+          {/* <ProjectCard/> */}
         </div>
       </main>
     </div>
