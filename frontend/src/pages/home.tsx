@@ -1,7 +1,9 @@
 import React from 'react';
 import Head from 'next/head';
-import BarraSuperior from "../assets/components/navbar/navbar"
-import PerfilCard from '../assets/components/perfilCard/perfilCard';
+import Navbar from "../assets/components/navbar/navbar.module";
+import PerfilCard from '../assets/components/perfilCard/perfilCard.module';
+import Seach from '../assets/components/buscarTags/buscaTags.module';
+import ProjectCard from '../assets/components/containerProjetos/projectContainer.module';
 import '../assets/css/globals.css';
 import styles from "../assets/css/home.module.css";
 
@@ -14,15 +16,18 @@ export default function Home() {
         <title>Orange Portfolio - Home</title>
       </Head>
       <header>
-        <BarraSuperior />
+        <Navbar />
       </header>
+
       <main>
         <div className={styles.Container}>
-              <PerfilCard />
+          <PerfilCard />
         </div>
         <div className={styles.BuscaProjetos}>        
-          <h3>Meus projetos</h3>
-          {/* Adicione campos de formulário, botões, etc. */}
+          <h3 className={styles.title}>Meus projetos</h3>
+          <Seach/>
+          {/* <ContainerProjetos/> */}
+          <ProjectCard/>
         </div>
       </main>
     </div>

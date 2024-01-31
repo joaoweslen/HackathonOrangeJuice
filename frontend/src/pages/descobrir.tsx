@@ -1,8 +1,8 @@
 import React from 'react';
 import Head from 'next/head';
-import DescobrirProjetos from '../assets/components/DescobrirProjetos/DescobrirProjetos'
-import BuscaTags from '../assets/components/buscarTags/BuscaTags'
-import BarraSuperior from '../assets/components/navbar/BarraSuperior';
+import ProjectCard from '../assets/components/containerProjetos/projectContainer.module'
+import BuscaTags from '../assets/components/buscarTags/buscaTags.module'
+import Navbar from "../assets/components/navbar/navbar.module";
 import styles from "../assets/css/descobrir.module.css";
 import '@fontsource/roboto/300.css';
 import '../assets/css/globals.css';
@@ -15,7 +15,7 @@ export default function Descobrir() {
         <title>Orange Portfolio - Descobrir</title>
       </Head>
       <header>
-        <BarraSuperior />
+        <Navbar />
       </header>
       <main>
         <div className={styles.Container}>
@@ -27,7 +27,7 @@ export default function Descobrir() {
         </div>
 
         <div>
-          <DescobrirProjetos/> 
+          {/* <ProjectCard/> */}
         </div>
         
       </main>

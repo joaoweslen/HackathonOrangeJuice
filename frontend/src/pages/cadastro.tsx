@@ -30,7 +30,7 @@ export default function Cadastro() {
         const reponseAPI = await requestPOST({
           route: '/register',
           body: {
-            first_Name: firstName,
+            first_name: firstName,
             last_name: lastName,
             email,
             password
@@ -49,7 +49,7 @@ export default function Cadastro() {
             <div className={styles.div_img}>
                 <Imagem className={styles.img}
                   src={cadas_img}
-                  alt="Logo da empresa Google" 
+                  alt="Imagem de uma garota sentada mexendo num notebook" 
                 />
             </div>
             <div className={styles.box}>
@@ -94,6 +94,8 @@ export default function Cadastro() {
                     <Button 
                       type="submit" 
                       value="CADASTRAR"
+                      Password={password}
+                      Email={email}
                       onClick={() => buttonRegister()}
                     />
                   </div>
