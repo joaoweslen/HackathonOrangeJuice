@@ -1,0 +1,9 @@
+.title{
+    position: absolute;
+    padding-left: 25vw;
+}
+
+.btn_x{
+    display: flex;
+    align-items: center;
+}
