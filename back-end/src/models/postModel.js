@@ -1,29 +1,63 @@
-const { connection } = require("./connection/connection");
+const { response } = require("express");
+const { connection, BUCKET } = require("./connection/connection");
+const { post } = require("../routes/portfolioRouter");
 const db = connection.firestore();
 
-const multer = require('multer')
-const Multer = multer({
-    storage: multer.memoryStorage()
-})
-
-
-const createPost = async (data) => {
-    const id = crypto.randomUUID();
-    const postRef = db.collection("posts").doc(id);
+const uploadImage = async (req, res, next)  => {
+    const bucket = connection.storage().bucket()
     
-    const { firebaseUrl } = data.file;
+    const image = req.file;
+
+    const fileName = Date.now() + "." + image.originalname;
+  
+    const file = bucket.file("images/" + fileName);
+
+    //console.log(file)
+
+    const stream = file.createWriteStream({
+      metadata: {
+        contentType: image.mimetype
+      }
+    });
+  
+    stream.on("error", (e) => {
+      console.error(e);
+    })
+  
+    stream.on("finish", async () => {
+      await file.makePublic();
+  
+      req.file.firebaseUrl = `https://storage.googleapis.com/${BUCKET}/images/${fileName}`;
+  
+      next();
+    })
+  
+    stream.end(image.buffer);
+  };
+
+
+const createPost = async (userName, title, tags, url, imageUrl, description, ownerId) => {
+    const id = crypto.randomUUID()+Date.now();
+    const dateNow = new Date().toDateString();
+    const postRef = db.collection("posts").doc(id);
+    const userRef = db.collection("users").doc(ownerId);
+    const userDoc = await userRef.get();
 
     const postToUpload = {
         "id": id,
-        "title": data.body.title,
-        "tags": data.body.tags,
-        "url": data.body.url,
-        "image": firebaseUrl, 
-        "description": data.body.description,
+        "userName": userName,
+        "date": dateNow,
+        "title": title,
+        "tags": tags,
+        "url": url,
+        "image": imageUrl, 
+        "description": description,
     }
-
     await postRef.set(postToUpload);
-    
+    userRef.update({
+      ['posts']: connection.firestore.FieldValue.arrayUnion(id)
+    })
+
     return {postToUpload};
 }
 
@@ -32,7 +66,7 @@ const getAllPosts = async (data) => {
     const postsDoc = await postsRef.get();
 
     let postArr = [];
-    postDoc.forEach (doc => {
+    postsDoc.forEach (doc => {
         postArr.push(doc.data());
     });
 
@@ -46,6 +80,25 @@ const getById = async (id) => {
     return(postDoc.data());
 }
 
+const getPostsForIdUser = async (id) => {
+    const postRef = db.collection("posts");
+    const postDocs = await postRef.get();
+
+    const postArr = [];
+
+    postDocs.forEach((doc) => {
+      postArr.push(doc.data());
+    })
+
+    const postArrFiltred = postArr.filter((doc) => {
+      if(doc.ownerId == id) return doc;
+    })
+
+    //console.log("getPostsForIdUser " + postArrFiltred)
+
+    return postArrFiltred;
+}
+
 const updateById = async (id, data) => {
     const postRef = db.collection("posts").doc(id);
     await postRef.update(data);
@@ -55,9 +108,14 @@ const updateById = async (id, data) => {
 }
 
 const deleteById = async (id) => {
-    const postRef = await db.collection("posts").doc(id).delete();
+    const data = await getById(id);
+    const imageUrl = data.image;
+    console.log(imageUrl)
 
-    return postRef;
+    // db.collection("posts").doc(id).delete();
+    connection.storage().bucket().file(imageUrl).delete();
+
+    return response.status(204);
 }
 
 module.exports = {
@@ -66,5 +124,7 @@ module.exports = {
     getAllPosts,
     getById,
     updateById,
-    deleteById
+    deleteById,
+    uploadImage,
+    getPostsForIdUser
 }

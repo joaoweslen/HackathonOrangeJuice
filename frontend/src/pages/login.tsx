@@ -45,7 +45,7 @@ export default function Login() {
     async function butonLogin(){
 
       try {
-        const userData = {email,password}
+        const userData = {email, password}
         const respnseAPI = await requestPOST({route: '/login', body: {email, password}});
 
         localStorage.setItem('data', JSON.stringify(respnseAPI));

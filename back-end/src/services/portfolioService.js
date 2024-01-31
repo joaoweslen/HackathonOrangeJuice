@@ -1,8 +1,8 @@
 const postModel = require('../models/postModel');
 
-const registerService = async (data) => {
-    const response = await postModel.createPost(data);
-    console.log(response)
+const registerService = async (userName, title, tags, url, imageUrl, description, ownerId) => {
+    const response = await postModel.createPost(userName, title, tags, url, imageUrl, description, ownerId);
+    // console.log(response)
     return response;
 }
 
@@ -11,8 +11,13 @@ const getAllService = async() => {
     return response;
 }
 
-const getByIdService = async(id) => {
-    const response = await postModel.getById(id);
+const getByPostIdService = async(id) => {
+    const response = await postModel.getByPostsId(id);
+    return response;
+}
+
+const getByOwnerIdService = async(id) => {
+    const response = await postModel.getPostsForIdUser(id);
     return response;
 }
 
@@ -29,7 +34,8 @@ const deleteByIdService = async (id) => {
 module.exports = {
     registerService,
     getAllService,
-    getByIdService,
+    getByPostIdService,
+    getByOwnerIdService,
     updateByIdService,
     deleteByIdService
 };

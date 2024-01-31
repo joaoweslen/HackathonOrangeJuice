@@ -1,5 +1,6 @@
 const { Router } = require('express');
-const { uploadImage } = require('../models/connection/connection')
+const { uploadImage } = require('../models/postModel')
+const authenticacionToken = require('../middlewares/authenticacionToken');
 
 const multer = require('multer')
 const Multer = multer({
@@ -10,10 +11,11 @@ const portfolioController = require('../controllers/portfolioController')
 
 const portfolioRouter = Router();
 
-// portfolioRouter.post('/', Multer.single("image"), uploadImage, portfolioController.register);
-portfolioRouter.get('/', portfolioController.getAll);
-portfolioRouter.get('/:id', portfolioController.findById);
-portfolioRouter.put('/:id', portfolioController.updateById);
-portfolioRouter.delete('/:id', portfolioController.deleteById);
+portfolioRouter.post('/', authenticacionToken, Multer.single("image"), uploadImage, portfolioController.register);
+portfolioRouter.get('/', authenticacionToken, portfolioController.getAll);
+portfolioRouter.get('/posts/:id', authenticacionToken, portfolioController.findByPostsId);
+portfolioRouter.get('/userposts', authenticacionToken, portfolioController.findByOwnerId);
+portfolioRouter.put('/:id', authenticacionToken, portfolioController.updateById);
+portfolioRouter.delete('/:id', authenticacionToken, portfolioController.deleteById);
 
 module.exports = portfolioRouter;
