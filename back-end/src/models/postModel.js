@@ -1,5 +1,7 @@
 const { response } = require("express");
 const { connection, BUCKET } = require("./connection/connection");
+const { post } = require("../routes/portfolioRouter");
+
 const db = connection.firestore();
 
 const uploadImage = async (req, res, next)  => {
@@ -10,8 +12,6 @@ const uploadImage = async (req, res, next)  => {
     const fileName = Date.now() + "." + image.originalname;
   
     const file = bucket.file("images/" + fileName);
-
-    console.log(file)
 
     const stream = file.createWriteStream({
       metadata: {
@@ -35,23 +35,29 @@ const uploadImage = async (req, res, next)  => {
   };
 
 
-const createPost = async (data) => {
+const createPost = async (userName, title, tags, url, imageUrl, description, ownerId) => {
     const id = crypto.randomUUID()+Date.now();
+    const dateNow = new Date().toDateString();
+  
     const postRef = db.collection("posts").doc(id);
-    
-    const { firebaseUrl } = data.file;
+    const userRef = db.collection("users").doc(ownerId);
+    const userDoc = await userRef.get();
 
     const postToUpload = {
         "id": id,
-        "title": data.body.title,
-        "tags": data.body.tags,
-        "url": data.body.url,
-        "image": firebaseUrl, 
-        "description": data.body.description,
+        "userName": userName,
+        "date": dateNow,
+        "title": title,
+        "tags": tags,
+        "url": url,
+        "image": imageUrl, 
+        "description": description,
     }
-
     await postRef.set(postToUpload);
-    
+    userRef.update({
+      ['posts']: connection.firestore.FieldValue.arrayUnion(id)
+    })
+
     return {postToUpload};
 }
 
@@ -74,6 +80,25 @@ const getById = async (id) => {
     return(postDoc.data());
 }
 
+const getPostsForIdUser = async (id) => {
+    const postRef = db.collection("posts");
+    const postDocs = await postRef.get();
+
+    const postArr = [];
+
+    postDocs.forEach((doc) => {
+      postArr.push(doc.data());
+    })
+
+    const postArrFiltred = postArr.filter((doc) => {
+      if(doc.ownerId == id) return doc;
+    })
+
+    //console.log("getPostsForIdUser " + postArrFiltred)
+
+    return postArrFiltred;
+}
+
 const updateById = async (id, data) => {
     const postRef = db.collection("posts").doc(id);
     await postRef.update(data);
@@ -87,8 +112,8 @@ const deleteById = async (id) => {
     const imageUrl = data.image;
     console.log(imageUrl)
 
-    db.collection("posts").doc(id).delete();
-    connection.storage().bucket(imageUrl).deleteFiles();
+    // db.collection("posts").doc(id).delete();
+    connection.storage().bucket().file(imageUrl).delete();
 
     return response.status(204);
 }
@@ -100,5 +125,7 @@ module.exports = {
     getById,
     updateById,
     deleteById,
+    uploadImage,
+    getPostsForIdUser
     uploadImage
 }
