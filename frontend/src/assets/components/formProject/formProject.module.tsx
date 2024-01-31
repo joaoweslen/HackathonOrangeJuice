@@ -2,6 +2,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import {Box, Modal, Button, Typography, Grid} from '@mui/material';
 import Input from '../input/input.module';
+import TagInput from '../input/tagInput.module';
 import styles from "./formProject.module.css";
 
 const style = {
@@ -18,6 +19,7 @@ const style = {
 
 export default function FormProject() {
     const [image, setImage] = React.useState('');
+ 
 
     const handleImageChange = (event:any) => {
       setImage(URL.createObjectURL(event.target.files[0]));
@@ -70,7 +72,7 @@ export default function FormProject() {
                       <Input sx={{width: '100%'}} name="" label="Título" type="text" id=""/>
                     </Grid>
                     <Grid item>
-                      <Input sx={{width: '100%'}}  name="" label="Tags" type="text" id=""/>
+                      <TagInput name="" label="Tags" type="text" id="" />
                     </Grid>
                     <Grid item>
                       <Input sx={{width: '100%'}}  name="" label="Link" type="text" id=""/>

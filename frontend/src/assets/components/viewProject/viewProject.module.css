@@ -1,9 +1,21 @@
 .title{
     position: absolute;
     padding-left: 25vw;
+    padding-top: 1%;
+    color: rgb(33, 33, 33);
+    font-weight: 600;
+}
+.content{
+    padding: 0;
+    padding-top: 3%;
 }
 
-.btn_x{
-    display: flex;
-    align-items: center;
+.link{
+    text-decoration: none;
+    color: #4461cb;
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+}
+  
+.link:hover{
+    text-decoration: underline;
 }

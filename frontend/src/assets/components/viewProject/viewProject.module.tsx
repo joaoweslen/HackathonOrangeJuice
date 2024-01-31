@@ -38,12 +38,12 @@ export default function ViewProject() {
                 style={{overflow: "auto"}}
             >
                 <Box sx={style}>
-                    <IconButton  sx={{position:'absolute', right:8, top:8}} onClick={handleClose}>
+                    <IconButton sx={{position:'absolute', right:8, top:8}} onClick={handleClose}>
                         <CloseIcon/>
                     </IconButton>
                     <Card elevation={0}>
-                        <Typography className={styles.title}>Titulo do Banner</Typography>
-                        <CardHeader sx={{padding:0}}
+                        <Typography className={styles.title} component='p'>Titulo do Banner</Typography>
+                        <CardHeader sx={{padding:0, marginBottom:'3%', display:{xs:'none',md:'flex'}}}
                             avatar={
                                 <Avatar  alt="Avatar" src="/Circle.svg"/>
                             }
@@ -53,11 +53,11 @@ export default function ViewProject() {
                         <CardMedia
                             component="img"
                             width="auto"
-                            height="500"
+                            height="450"
                             image=""
                         />
 
-                        <CardContent sx={{padding:0}}>
+                        <CardContent className={styles.content} >
                             <Typography component="p">
                             This impressive paella is a perfect party dish and a fun meal to cook
                             together with your guests. Add 1 cup of frozen peas along with the mussels,
@@ -65,9 +65,9 @@ export default function ViewProject() {
                             </Typography>
                         </CardContent>
 
-                        <CardContent sx={{padding:0}}>
+                        <CardContent className={styles.content}>
                             <Typography component="p">Download</Typography>
-                            <Link href="https://www.youtube.com/" target="_blank">www.teste.com</Link>
+                            <Link href="https://www.youtube.com/" target="_blank" className={styles.link}>www.teste.com</Link>
                         </CardContent>
                     </Card>
                 </Box>
