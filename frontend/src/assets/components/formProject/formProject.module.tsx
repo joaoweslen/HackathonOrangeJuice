@@ -1,17 +1,11 @@
 import * as React from 'react';
 import Link from 'next/link';
-import Imagem from 'next/image'
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal'
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import {Box, Modal, Button, Typography, Grid} from '@mui/material';
 import Input from '../input/input.module';
-import Grid from '@mui/material/Grid';
 import styles from "./formProject.module.css";
-import img_cont from "../../img/img_container.jpg"
 
 const style = {
-    position: 'absolute' as 'absolute',
+    position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
@@ -45,25 +39,24 @@ export default function FormProject() {
 
         <Modal
           open={open}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
+          style={{overflow: "auto"}}
         >
-          <Box sx={style}>
+          <Box className={styles.box} sx={style}>
             <Typography id="modal-modal-title" variant="h5" component="h1">
                 Adicionar projeto
             </Typography>
 
             <Grid container sx={{mt: 1.5}}>
-                <Grid item xs={6}>
-                <Typography id="modal-modal-title" component="p">
-                  Selecione o conteúdo que você deseja fazer upload
-                </Typography>
+                <Grid item xs={6} sx={{display:{xs:'none',md:'unset'}}}>
+                  <Typography className={styles.text} component="p">
+                    Selecione o conteúdo que você deseja fazer upload
+                  </Typography>
 
-                {/* <input type="file" onChange={handleImageChange}/><br/> */}
-                <img className={styles.img}
-                  src={image}
-                  alt="" 
-                />
+                  {/* <input type="file" onChange={handleImageChange}/><br/> */}
+                  <img className={styles.img}
+                    src=""
+                    alt="" 
+                  />
                 </Grid>
                 
                 <Grid item xs={6}>
@@ -71,6 +64,7 @@ export default function FormProject() {
                     container item spacing={2}
                     direction="column"
                     justifyContent="center"
+                    className={styles.fullInput}
                   >
                     <Grid item>
                       <Input sx={{width: '100%'}} name="" label="Título" type="text" id=""/>
@@ -85,8 +79,19 @@ export default function FormProject() {
                       <Input sx={{width: '100%'}}  name="" label="Descrição" type="text" id="" multiline rows={4}/>
                     </Grid>
                   </Grid>
-                </Grid>  
+                </Grid>
             </Grid>
+
+            <Box sx={{display:{xs:'unset',md:'none'}}}>
+              <Typography className={styles.text} component="p">
+                Selecione o conteúdo que você deseja fazer upload
+              </Typography>
+
+              <img className={styles.img}
+                src=""
+                alt="" 
+              />
+            </Box>
 
             <div>
               <Link className={styles.link} href="" passHref>Visualizar publicação</Link>
@@ -98,6 +103,7 @@ export default function FormProject() {
                 size="large">
                 Salvar
               </Button>
+              
               <Button className={styles.btn_close}
                 onClick={handleClose}
                 variant="contained" 
