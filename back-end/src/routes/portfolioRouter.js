@@ -18,4 +18,5 @@ portfolioRouter.get('/userposts', authenticacionToken, portfolioController.findB
 portfolioRouter.put('/:id', authenticacionToken, portfolioController.updateById);
 portfolioRouter.delete('/:id', authenticacionToken, portfolioController.deleteById);
 
+
 module.exports = portfolioRouter;

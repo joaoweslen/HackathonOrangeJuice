@@ -1,6 +1,7 @@
 const { response } = require("express");
 const { connection, BUCKET } = require("./connection/connection");
 const { post } = require("../routes/portfolioRouter");
+
 const db = connection.firestore();
 
 const uploadImage = async (req, res, next)  => {
@@ -11,8 +12,6 @@ const uploadImage = async (req, res, next)  => {
     const fileName = Date.now() + "." + image.originalname;
   
     const file = bucket.file("images/" + fileName);
-
-    //console.log(file)
 
     const stream = file.createWriteStream({
       metadata: {
@@ -39,6 +38,7 @@ const uploadImage = async (req, res, next)  => {
 const createPost = async (userName, title, tags, url, imageUrl, description, ownerId) => {
     const id = crypto.randomUUID()+Date.now();
     const dateNow = new Date().toDateString();
+  
     const postRef = db.collection("posts").doc(id);
     const userRef = db.collection("users").doc(ownerId);
     const userDoc = await userRef.get();
@@ -127,4 +127,5 @@ module.exports = {
     deleteById,
     uploadImage,
     getPostsForIdUser
+    uploadImage
 }
