@@ -13,6 +13,10 @@ export const requestGET = async (route:any) =>{
     return resp.data;
 };
 
+export const setToken = async (token:any) =>{
+api.defaults.headers.common.Authorization = token;
+};
+
 export const requestPOST = async ({route, body}:{route:any, body:any}) =>{
     
     const resp = await api.post(route, body);

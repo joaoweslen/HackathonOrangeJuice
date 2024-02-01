@@ -26,8 +26,8 @@ const updateByIdService = async(id, data) => {
     return response;
 }
 
-const deleteByIdService = async (id) => {
-    const response = await postModel.deleteById(id);
+const deleteByIdService = async (id, ownerId) => {
+    const response = await postModel.deleteById(id, ownerId);
     return response;
 }
 

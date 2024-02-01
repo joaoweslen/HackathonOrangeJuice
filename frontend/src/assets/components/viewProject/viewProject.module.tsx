@@ -15,7 +15,6 @@ const style = {
     bgcolor: 'background.paper',
     border: 0,
     boxShadow: 24,
-    p: 6,
 };
 
 export default function ViewProject() {
@@ -25,49 +24,62 @@ export default function ViewProject() {
 
     return (
         <div>
-            <Button className={styles.button}
-                onClick={handleOpen}
-                variant="contained"
-                href='#'
-                size="large">
-                ADICIONAR PROJETO
-            </Button>
-
             <Modal
                 open={open}
                 style={{overflow: "auto"}}
             >
-                <Box sx={style}>
-                    <IconButton  sx={{position:'absolute', right:8, top:8}} onClick={handleClose}>
+                <Box sx={style} className={styles.box}>
+                    <IconButton sx={{position:'absolute', right:8, top:8}} onClick={handleClose}>
                         <CloseIcon/>
                     </IconButton>
                     <Card elevation={0}>
-                        <Typography className={styles.title}>Titulo do Banner</Typography>
-                        <CardHeader sx={{padding:0}}
+                        <Typography className={styles.title} component='p'>Titulo do Banner</Typography>
+                        <CardHeader sx={{padding:0, paddingBottom:'3%', display:{xs:'none',md:'flex'}}}
+                            avatar={
+                                <Avatar alt="Avatar" src="/Circle.svg"/>
+                            }
+                            action={
+                                <div className={styles.boxTag}>
+                                    <IconButton className={styles.tag}>UX</IconButton>
+                                    <IconButton className={styles.tag}>DEV</IconButton>
+                                </div>
+                            }
+                            title={
+                                <Typography className={styles.name} component="p">Camila Soares</Typography>
+                            }
+                            subheader="12/12"
+                        />
+                        <CardMedia className={styles.img}
+                            component="img"
+                            image="https://i.ytimg.com/vi/pLqipJNItIo/hqdefault.jpg?sqp=-oaymwEYCNIBEHZIVfKriqkDCwgBFQAAiEIYAXAB&rs=AOn4CLBkklsyaw9FxDmMKapyBYCn9tbPNQ"
+                        />
+                        <CardHeader sx={{padding:0, paddingTop:'3%', display:{xs:'flex',md:'none'}}}
                             avatar={
                                 <Avatar  alt="Avatar" src="/Circle.svg"/>
                             }
-                            title="Camilla Soares"
+                            action={
+                                <div className={styles.boxTag}>
+                                    <IconButton className={styles.tag}>UX</IconButton>
+                                    <IconButton className={styles.tag}>DEV</IconButton>
+                                </div>
+                            }
+                            title={
+                                <Typography className={styles.name} component="p">Camila Soares</Typography>
+                            }
                             subheader="12/12"
                         />
-                        <CardMedia
-                            component="img"
-                            width="auto"
-                            height="500"
-                            image=""
-                        />
 
-                        <CardContent sx={{padding:0}}>
-                            <Typography component="p">
-                            This impressive paella is a perfect party dish and a fun meal to cook
-                            together with your guests. Add 1 cup of frozen peas along with the mussels,
-                            if you like.
-                            </Typography>
+                        <CardContent className={styles.content} >
+                            <p className={styles.text} >
+                                This impressive paella is a perfect party dish and a fun meal to cook
+                                together with your guests. Add 1 cup of frozen peas along with the mussels,
+                                if you like.
+                            </p>
                         </CardContent>
 
-                        <CardContent sx={{padding:0}}>
-                            <Typography component="p">Download</Typography>
-                            <Link href="https://www.youtube.com/" target="_blank">www.teste.com</Link>
+                        <CardContent className={styles.contentLink}>
+                            <Typography className={styles.down} component="p">Download</Typography>
+                            <Link href="https://www.youtube.com/" target="_blank" className={styles.link}>www.teste.com</Link>
                         </CardContent>
                     </Card>
                 </Box>
