@@ -110,7 +110,7 @@ const updateById = async (id, data) => {
 const deleteById = async (id) => {
     const data = await getById(id);
     const imageUrl = data.image;
-    console.log(imageUrl)
+    //console.log(imageUrl)
 
     // db.collection("posts").doc(id).delete();
     connection.storage().bucket().file(imageUrl).delete();
