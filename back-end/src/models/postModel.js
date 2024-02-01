@@ -1,7 +1,6 @@
 const { response } = require("express");
 const { connection, BUCKET } = require("./connection/connection");
 const { post } = require("../routes/portfolioRouter");
-<<teste>>
 const db = connection.firestore();
 
 const uploadImage = async (req, res, next)  => {
@@ -111,9 +110,11 @@ const updateById = async (id, data) => {
 const deleteById = async (id, ownerId) => {
     const data = await getById(id);
     const imageUrl = data.image;
+
     const startIndex = imageUrl.indexOf("/images/") + "/images/".length
     const filePath = imageUrl.substring(startIndex);
     const userRef = db.collection("users").doc(ownerId);
+
 
     db.collection("posts").doc(id).delete();
     connection.storage().bucket().file("images/" + filePath).delete();

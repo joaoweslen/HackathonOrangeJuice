@@ -22,25 +22,27 @@ const getAll = async (req, res) => {
 
 const findByPostsId = async (req, res) => {
     const portfolio = await portfolioService.getByIdService(req.params.id);
-    res.status(200).send(portfolio);
+    res.status(200).json(portfolio);
 };
 
 const findByOwnerId = async (req, res) => {
     console.log(req.id)
     const portfolio = await portfolioService.getByOwnerIdService(req.id);
-    res.status(200).send(portfolio);
+    //console.log(portfolio, "Controlerr");
+    res.status(200).json(portfolio);
+
 };
 
 
 const updateById = async (req, res) => {
     const portfolio = await portfolioService.updateByIdService(req.params.id, req.body);
-    res.status(200).send(portfolio);
+    res.status(200).json(portfolio);
 };
 
 const deleteById = async (req, res) => {
     const ownerId = req.id;
     const response = await portfolioService.deleteByIdService(req.params.id, ownerId);
-    res.send(response);
+    res.json(response);
 };
 
 module.exports = {
