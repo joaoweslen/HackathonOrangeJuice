@@ -47,9 +47,9 @@ export default function Login() {
 
       try {
         const userData = {email, password}
-        const respnseAPI = await requestPOST({route: '/login', body: {email, password}});
+        const responseAPI = await requestPOST({route: '/login', body: {email, password}});
 
-        localStorage.setItem('data', JSON.stringify(respnseAPI));
+        localStorage.setItem('data', JSON.stringify(responseAPI));
         setIsLoged(true);
 
         //console.log(respnseAPI);

@@ -3,7 +3,7 @@ const portfolioService = require('../services/portfolioService');
 const errorMessage = { status: 400, message: 'Bad Request!'};
 
 const register = async(req, res) => {
-    const {userName, title, tags, url, description, id} = req.body;
+    const {userName, title, tags, url, description} = req.body;
     const ownerId = req.id;
     const { firebaseUrl } = req.file;
     const imageUrl = firebaseUrl;
@@ -33,9 +33,11 @@ const findByOwnerId = async (req, res) => {
 
 };
 
-
 const updateById = async (req, res) => {
-    const portfolio = await portfolioService.updateByIdService(req.params.id, req.body);
+    const { firebaseUrl } = req.file;
+    const imageUrl = firebaseUrl;
+    
+    const portfolio = await portfolioService.updateByIdService(req.params.id, req.body, imageUrl);
     res.status(200).json(portfolio);
 };
 

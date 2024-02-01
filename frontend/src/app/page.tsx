@@ -10,12 +10,12 @@ export default function Page() {
       <section>
         <div>
           <Link href={{ pathname: '/login', query: contextData }} passHref>
-            <a>Login</a>
+            Login
           </Link>
         </div>
         <div>
           <Link href={{ pathname: '/cadastro', query: contextData }} passHref>
-            <a>Cadastro</a>
+            Cadastro
           </Link>
         </div>
       </section>

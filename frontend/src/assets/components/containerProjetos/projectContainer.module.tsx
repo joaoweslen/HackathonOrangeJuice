@@ -3,8 +3,23 @@ import styles from "./projectContainer.module.css"
 import {Card, CardHeader, Box, CardMedia, CardContent, Typography, IconButton,
      Avatar, Menu, MenuList, MenuItem} from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
+import { requestDELETE, requestPUT } from '../../../utils/request'
 
 export default function ProjectContainer({data}:any) {
+
+    async function buttonDelete() {
+        try {
+            await requestDELETE('/portfolio/' + data.id)
+        }
+    }
+
+    async function buttonUpdate() {
+        try {
+            await requestPUT('/portfolio')
+
+        }
+    }
+
     const [anchorElEdit, setAnchorElEdit] = React.useState<null | HTMLElement>(null);
     const data1 = data;
 
@@ -18,6 +33,7 @@ export default function ProjectContainer({data}:any) {
     //console.log(data1)
 
   return (
+
     <div className={styles.box}>
         <IconButton className={styles.icon} size="small" onClick={handleOpenEdit}>
             <EditIcon />
@@ -51,6 +67,7 @@ export default function ProjectContainer({data}:any) {
                     </Typography>
                 }
             />
+
         </Card>
             
         

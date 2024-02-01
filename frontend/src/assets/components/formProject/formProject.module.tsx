@@ -3,6 +3,10 @@ import Link from 'next/link';
 import {Box, Modal, Button, Typography, Grid} from '@mui/material';
 import Input from '../input/input.module';
 import styles from "./formProject.module.css";
+import {useState, useEffect} from 'react';
+import { requestPOST } from "@/utils/request";
+import { useRouter } from 'next/navigation';
+import { request } from 'http';
 
 const style = {
     position: 'absolute',
@@ -17,7 +21,39 @@ const style = {
 };
 
 export default function FormProject() {
-    const [image, setImage] = React.useState('');
+
+    const [title, setTitle] = useState('');
+    const [tags, setTags] = useState([]);
+    const [url, setUrl] = useState('');
+    const [username, setUsername] = useState('');
+    const [description, setDescription] = useState('');
+    const [image, setImage] = useState('');
+    const [postExists, setPostExists] = useState(false);
+
+    // useEffect(() => {
+    //   setPostExists(false);
+    //   console.log(title, tags, url, username, description, image)
+    // },[title, tags, url, username, description, image])
+
+    // async function buttonRegister() {
+
+    //   try {
+    //     const responseApi = requestPOST({
+    //       route:"/portfolio",
+    //       body: {
+    //         title: title,
+    //         tags: tags,
+    //         url: url,
+    //         username: username,
+    //         description: description,
+    //         image:image  
+    //       }
+    //     });
+    //   } catch (e) {
+    //     console.error("Não foi possível cadastrar o portifolio!", e);
+    //   };
+      
+    // };
 
     const handleImageChange = (event:any) => {
       setImage(URL.createObjectURL(event.target.files[0]));

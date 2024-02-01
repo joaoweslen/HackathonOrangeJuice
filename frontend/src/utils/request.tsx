@@ -13,13 +13,19 @@ export const requestGET = async (route:any) =>{
     return resp.data;
 };
 
-export const setToken = async (token:any) =>{
-api.defaults.headers.common.Authorization = token;
-};
-
 export const requestPOST = async ({route, body}:{route:any, body:any}) =>{
     
     const resp = await api.post(route, body);
     console.log("AQIIIIIIIIIIIII AQIIIIIIIIIII")
     return resp.data;
 };
+
+export const requestDELETE = async (route:any) => {
+    const resp = await api.delete(route);
+    return resp;
+}
+
+export const requestPUT =async (route:any) => {
+    const resp = await api.put(route);
+    return resp;
+}

@@ -15,7 +15,7 @@ portfolioRouter.post('/', authenticacionToken, Multer.single("image"), uploadIma
 portfolioRouter.get('/', authenticacionToken, portfolioController.getAll);
 portfolioRouter.get('/posts/:id', authenticacionToken, portfolioController.findByPostsId);
 portfolioRouter.get('/userposts', authenticacionToken, portfolioController.findByOwnerId);
-portfolioRouter.put('/:id', authenticacionToken, portfolioController.updateById);
+portfolioRouter.put('/:id', authenticacionToken, Multer.single("image"), uploadImage, portfolioController.updateById);
 portfolioRouter.delete('/:id', authenticacionToken, portfolioController.deleteById);
 
 

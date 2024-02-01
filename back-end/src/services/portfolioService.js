@@ -21,8 +21,8 @@ const getByOwnerIdService = async(id) => {
     return response;
 }
 
-const updateByIdService = async(id, data) => {
-    const response = await postModel.updateById(id, data);
+const updateByIdService = async(id, data, imageUrl) => {
+    const response = await postModel.updateById(id, data, imageUrl);
     return response;
 }
 

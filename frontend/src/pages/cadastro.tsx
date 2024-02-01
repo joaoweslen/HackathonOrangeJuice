@@ -12,17 +12,17 @@ import { useRouter } from 'next/navigation';
 
 export default function Cadastro() {
 
-    const { push } = useRouter();
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [usersExists, setUsersExists] = useState(false);
+    // const { push } = useRouter();
+    // const [firstName, setFirstName] = useState('');
+    // const [lastName, setLastName] = useState('');
+    // const [email, setEmail] = useState('');
+    // const [password, setPassword] = useState('');
+    // const [usersExists, setUsersExists] = useState(false);
 
-    useEffect(()=>{
-      setUsersExists(false);
-      console.log(firstName,lastName,email,password)
-    },[firstName,lastName,email,password]);
+    // useEffect(()=>{
+    //   setUsersExists(false);
+    //   console.log(firstName,lastName,email,password)
+    // },[firstName,lastName,email,password]);
 
     async function buttonRegister() {
 

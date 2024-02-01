@@ -1,42 +1,49 @@
 const { response } = require("express");
 const { connection, BUCKET } = require("./connection/connection");
 const { post } = require("../routes/portfolioRouter");
+
 const db = connection.firestore();
 
 const uploadImage = async (req, res, next)  => {
-    const bucket = connection.storage().bucket()
+  
+  const image = req.file;
+
+  if(image){ 
+      const bucket = connection.storage().bucket();
     
-    const image = req.file;
+      const fileName = Date.now() + "." + image.originalname;
+      console.log(fileName)
+      const file = bucket.file("images/" + fileName);
 
-    const fileName = Date.now() + "." + image.originalname;
-  
-    const file = bucket.file("images/" + fileName);
+      const stream = file.createWriteStream({
+        metadata: {
+          contentType: image.mimetype
+        }
+      });
+    
+      stream.on("error", (e) => {
+        console.error(e);
+      })
+    
+      stream.on("finish", async () => {
+        await file.makePublic();
+        req.file.firebaseUrl = `https://storage.googleapis.com/${BUCKET}/images/${fileName}`;
 
-    const stream = file.createWriteStream({
-      metadata: {
-        contentType: image.mimetype
-      }
-    });
-  
-    stream.on("error", (e) => {
-      console.error(e);
-    })
-  
-    stream.on("finish", async () => {
-      await file.makePublic();
-  
-      req.file.firebaseUrl = `https://storage.googleapis.com/${BUCKET}/images/${fileName}`;
-  
+        next();
+      })
+    
+      stream.end(image.buffer);
+    } else {
+      console.log("Nenhuma imagem para atualizar.")
       next();
-    })
-  
-    stream.end(image.buffer);
-  };
+    }
+};
 
 
 const createPost = async (userName, title, tags, url, imageUrl, description, ownerId) => {
     const id = crypto.randomUUID()+Date.now();
-    const dateNow = new Date().toDateString();
+    const date = new Date();
+    const formattedDate = format(date, 'MM/yy');
   
     const postRef = db.collection("posts").doc(id);
     const userRef = db.collection("users").doc(ownerId);
@@ -44,15 +51,16 @@ const createPost = async (userName, title, tags, url, imageUrl, description, own
 
     const postToUpload = {
         "id": id,
+        "ownerId": ownerId,
+        "date": formattedDate,
         "userName": userName,
-        "date": dateNow,
         "title": title,
         "tags": tags,
         "url": url,
         "image": imageUrl, 
-        "description": description,
-        "ownerId": ownerId
+        "description": description
     }
+  
     await postRef.set(postToUpload);
     userRef.update({
       ['posts']: connection.firestore.FieldValue.arrayUnion(id)
@@ -99,10 +107,23 @@ const getPostsForIdUser = async (id) => {
     return postArrFiltred;
 }
 
-const updateById = async (id, data) => {
+const updateById = async (id, data, imageUrl) => {
     const postRef = db.collection("posts").doc(id);
     await postRef.update(data);
     const postDoc = await postRef.get();
+
+    
+    if(imageUrl) {
+      const oldImage = postDoc.data().image;
+      const startIndex = oldImage.indexOf("/images/") + "/images/".length;
+      const filePath = oldImage.substring(startIndex);
+      console.log(filePath)
+
+      postRef.update({
+        image: imageUrl,
+      })
+      connection.storage().bucket().file("images/" + filePath).delete();
+    }
 
     return(postDoc.data());
 }
@@ -118,6 +139,7 @@ const deleteById = async (id, ownerId) => {
 
     db.collection("posts").doc(id).delete();
     connection.storage().bucket().file("images/" + filePath).delete();
+
     userRef.update({
       ['posts']: connection.firestore.FieldValue.arrayRemove(id)
     })
