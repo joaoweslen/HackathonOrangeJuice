@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styles from "./viewProject.module.css";
 import Link from 'next/link';
+import '@fontsource/roboto/300.css';
 import {Box, Modal, Button, Card, CardHeader, CardMedia, CardContent, 
     Avatar, IconButton, Typography} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
@@ -24,6 +25,14 @@ export default function ViewProject() {
 
     return (
         <div>
+            <Button className={styles.button}
+                onClick={handleOpen}
+                variant="contained"
+                href='#'
+                size="large">
+                Ver Projeto
+            </Button>
+        
             <Modal
                 open={open}
                 style={{overflow: "auto"}}
