@@ -1,8 +1,9 @@
 const Users = require('../models/usersModel');
+const errorMessage = { status: 403, message: 'Token expired or invalid 1111' };
 
-const loginValidate = async (data) => {  
-  const errorMessage = { status: 403, message: 'Token not found' };
-  const userExists = await Users.findById(data.id);
+const loginValidate = async (Id) => {  
+  console.log("service" +Id)
+  const userExists = await Users.findById(Id);
   if (!userExists) throw errorMessage;
   return {
     id: userExists.id,

@@ -7,6 +7,12 @@ const authenticacionToken = require('../middlewares/authenticacionToken');
 const loginRouter = Router();
 
 loginRouter.post('/', loginController.loginController);
-loginRouter.get('/validate', authenticacionToken, loginValidateController);
+loginRouter.get('/validate', 
+    // (req,res) => {
+    //     res.status(200).json("foi")
+    // }
+    authenticacionToken,
+    loginValidateController
+);
 
 module.exports = loginRouter;

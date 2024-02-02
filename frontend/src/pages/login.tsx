@@ -12,7 +12,7 @@ import '../assets/css/globals.css';
 //import { useNavigation } from "react-router-dom";
 import {useState, useEffect} from 'react';
 import { useRouter } from 'next/navigation';
-import {requestPOST} from '../utils/request';
+import {requestPOST, setToken, requestGET} from '../utils/request';
 
 
 export default function Login() {
@@ -47,13 +47,18 @@ export default function Login() {
 
       try {
         const userData = {email, password}
-        const responseAPI = await requestPOST({route: '/login', body: {email, password}});
+        const responseAPIlogin = await requestPOST({route: '/login', body: {email, password}});
 
-        localStorage.setItem('data', JSON.stringify(responseAPI));
+        localStorage.setItem('token', JSON.stringify(responseAPIlogin.token));
+        setToken(responseAPIlogin.token);
+        const responseAPIvalidate = await requestGET('/login/validate');
+        localStorage.setItem('user', JSON.stringify(responseAPIvalidate));
         setIsLoged(true);
 
         //console.log(respnseAPI);
       } catch (e) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
         setFaledTryLogin(true);
         setIsLoged(false);
       }

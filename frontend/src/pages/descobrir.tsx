@@ -14,6 +14,7 @@ import { useRouter } from 'next/navigation';
 
 export default function Descobrir() {
   const [posts, setPost] = useState([]);
+  const [tag, setTag] = useState("");
   const { push } = useRouter();
 
   useEffect(() => {
@@ -23,9 +24,10 @@ export default function Descobrir() {
 
   async function loadPosts() {
     try {
-      const token = JSON.parse(localStorage.getItem("data") || "");
-      setToken(token.token);
-      const responseAPI = await requestGET('/portfolio/userposts') ;
+      const token = JSON.parse(localStorage.getItem("token") || "");
+      setToken(token);
+      const responseAPI = await requestGET('/portfolio');
+      //console.log(responseAPI);
       setPost(responseAPI);
     } catch (error) {
       console.error(error);
@@ -48,16 +50,16 @@ export default function Descobrir() {
                  transformando experiências em conexões inesquecíveis</h1>
         </div>
         <div className={styles.BuscaProjetos}>        
-          <BuscaTags/>
+          <BuscaTags valueTag={tag} functionSetTag={setTag}/>
         </div>
 
         <div>
           {/* <ProjectCard/> */}
           <ViewProject/>
+          {console.log(posts)}
           {
-            posts.map((post:any ,i ) => {
-              return <ProjectContainer key={i} data={post} />
-            })
+            posts.filter((post:any ,i ) => post.tags.join("/").includes(tag))
+              .map((post:any ,i ) =>  <ProjectContainer key={i} data={post} />)
           }
           {/* <ProjectContainer/> */}
         </div>
