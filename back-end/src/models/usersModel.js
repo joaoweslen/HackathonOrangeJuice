@@ -45,7 +45,7 @@ const createUsers = async (data) => {
     const userExists = await findOne(email);
     if(userExists.length) throw { status: 409 , message: "E-mail already registered" };
 
-    const id = uuid.v4();
+    const id = uuid.v4() + Date.now();
     
     const usersRef =  db.collection("users").doc(id);
 
@@ -54,8 +54,7 @@ const createUsers = async (data) => {
         last_name,
         email,
         password,
-        first_name,
-        posts: []
+        first_name
     }
 
     await usersRef.set(serializeUser, { merge: true })
@@ -69,14 +68,13 @@ const createUsers = async (data) => {
     const usersDoc = await usersRef.get(id);
     //if(!usersDoc.id) throw { status: 500 , message: "error server" };
     const dataResponseDb = usersDoc.data()
-    console.log(usersDoc.data());
+    //console.log(usersDoc.data());
 
     return {
         id,
         "email": dataResponseDb.email,
         "first_name": dataResponseDb.first_name,
         "last_name": dataResponseDb.last_name,
-        posts: dataResponseDb.posts
     };
 }
 

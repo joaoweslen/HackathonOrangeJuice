@@ -27,8 +27,6 @@ const registerService = async (data) => {
   
   const serializeUser = {  
     ...userExists,
-    token: tokenUser,
-    posts:[]
   }
   //console.log(serializeUser, userExists);
   return serializeUser;

@@ -20,15 +20,15 @@ export default function ProjectContainer({data}:any) {
     //     }
     // }
 
-    const [anchorElEdit, setAnchorElEdit] = React.useState<null | HTMLElement>(null);
-    const data1 = data;
+    // const [anchorElEdit, setAnchorElEdit] = React.useState<null | HTMLElement>(null);
+    // const data1 = data;
 
-    const handleOpenEdit = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElEdit(event.currentTarget);
-    };
-    const handleCloseEdit = () => {
-        setAnchorElEdit(null);
-    };
+    // const handleOpenEdit = (event: React.MouseEvent<HTMLElement>) => {
+    //     setAnchorElEdit(event.currentTarget);
+    // };
+    // const handleCloseEdit = () => {
+    //     setAnchorElEdit(null);
+    // };
 
     //console.log(data1)
 

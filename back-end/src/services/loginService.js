@@ -19,7 +19,7 @@ const login = async (email, password) => {
 
   const token = await generateToken(selializeUserData);
 
-  return {token: token, ...selializeUserData};
+  return {token: token};
 };
 
 module.exports = {
