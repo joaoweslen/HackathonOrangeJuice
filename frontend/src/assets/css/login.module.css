@@ -68,3 +68,9 @@
     display: none;
   }  
 }
+
+@media (min-height: 1100px){
+  .img{
+    margin-top: 17vh;
+  }  
+}

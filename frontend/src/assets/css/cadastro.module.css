@@ -28,14 +28,21 @@
   gap: 15px;
 }
 
-.text{
+.link, .text{
+  text-decoration: none;
   color: #85878e;
   font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
 }
+
+.link:hover{
+  text-decoration: underline;
+}
+
 .div_img{
   display: inline-block;
   margin: 0;
 }
+
 .img{
     position: fixed;
     width: 35%;
@@ -64,4 +71,10 @@
     width: auto;
     margin-right: 0;
   }
+}
+
+@media (min-height: 1100px){
+  .img{
+    margin-top: 15vh;
+  }  
 }

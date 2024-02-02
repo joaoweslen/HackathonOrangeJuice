@@ -5,13 +5,12 @@
 .title{
     text-align: center;
     font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-    font-size: 158%;
 }
 
 
 @media (min-width: 800px) {
     .title{
-        font-size: 3rem;
+        font-size: 3.4vw;
     }  
 }
 
