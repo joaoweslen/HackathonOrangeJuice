@@ -3,6 +3,8 @@ import FormCard from "@/assets/components/formCard/formCard.module";
 import Input from "@/assets/components/input/input.module";
 import Password from "@/assets/components/input/password.module";
 import Button from "@/assets/components/button/button.module";
+import SucessAlert from "@/assets/components/alerts/sucessAlert.module";
+import ErroAlert from "@/assets/components/alerts/erroAlert.module";
 import Link from 'next/link';
 import Google from "@/assets/img/lg_google.png"
 import login_img from "@/assets/img/img_login.jpg"
@@ -34,10 +36,10 @@ export default function Login() {
 
     useEffect(() => {
         if(isLoged) {
-          push("/home");
-
+          setTimeout(() => {
+            push("/home");
+          }, 3000);
         }
-
       },
       [isLoged,push]
     );
@@ -57,24 +59,10 @@ export default function Login() {
         setFaledTryLogin(true);
         setIsLoged(false);
       }
-
-
     };
 
     return (
       <main>
-        {
-        (faledTryLogin)
-          ? (
-            <h1 style={{background: "red"}}>
-              {
-                `O endereço de e-mail ou a senha não estão corretos.
-                    Por favor, tente novamente.`
-              }
-            </h1>
-          )
-          : null
-        }
         <div className={styles.div_img}>
               <Imagem className={styles.img}
                 src={login_img}
@@ -83,8 +71,9 @@ export default function Login() {
               />
             </div>
           <div className={styles.box}>
+            {isLoged && <SucessAlert mensagem={"Logado com sucesso!"}/>}
+            {faledTryLogin && <ErroAlert mensagem={"Login ou senha inválidos!"}/>}
 
-            
             <FormCard title="Entre no Orange Portfólio">
               <div  className={styles.form}>
                 <button className={styles.google}>
