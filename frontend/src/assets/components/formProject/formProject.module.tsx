@@ -4,9 +4,8 @@ import {Box, Modal, Button, Typography, Grid} from '@mui/material';
 import Input from '../input/input.module';
 import styles from "./formProject.module.css";
 import {useState, useEffect} from 'react';
-import { requestPOST } from "@/utils/request";
-import { useRouter } from 'next/navigation';
-import { request } from 'http';
+import { requestPOST, setToken } from "@/utils/request";
+import SucessAlert from "@/assets/components/alerts/sucessAlert.module";
 
 const style = {
     position: 'absolute',
@@ -28,32 +27,34 @@ export default function FormProject() {
     const [username, setUsername] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
-    const [postExists, setPostExists] = useState(false);
+    const [postRegistered, setPostRegistered] = useState(false);
 
-    // useEffect(() => {
-    //   setPostExists(false);
-    //   console.log(title, tags, url, username, description, image)
-    // },[title, tags, url, username, description, image])
+    useEffect(() => {
+      setPostRegistered(false);
+        console.log(title, tags, url, username, description, image)
+    },[title, tags, url, username, description, image])
 
-    // async function buttonRegister() {
-
-    //   try {
-    //     const responseApi = requestPOST({
-    //       route:"/portfolio",
-    //       body: {
-    //         title: title,
-    //         tags: tags,
-    //         url: url,
-    //         username: username,
-    //         description: description,
-    //         image:image  
-    //       }
-    //     });
-    //   } catch (e) {
-    //     console.error("Não foi possível cadastrar o portifolio!", e);
-    //   };
+    async function buttonRegister() {
+        const token = JSON.parse(localStorage.getItem('token') || '');
+        setToken(token);
+        try {
+          const responseApi = requestPOST({
+            route:"/portfolio",
+            body: {
+                title: title,
+                tags: tags,
+                url: url,
+                username: username,
+                description: description,
+                image:image  
+            }
+          });
+          setPostRegistered(true);
+        } catch (e) {
+          console.error("Não foi possível cadastrar o portifolio!", e);
+        };
       
-    // };
+    };
 
     const handleImageChange = (event:any) => {
       setImage(URL.createObjectURL(event.target.files[0]));
@@ -65,6 +66,7 @@ export default function FormProject() {
 
     return (
         <div>
+          {postRegistered && <SucessAlert mensagem={"Cadastro feito com sucesso"}/>}
         <Button className={styles.button}
             onClick={handleOpen}
             variant="contained"
@@ -103,16 +105,41 @@ export default function FormProject() {
                     className={styles.fullInput}
                   >
                     <Grid item>
-                      <Input sx={{width: '100%'}} name="" label="Título" type="text" id=""/>
+                      <Input sx={{width: '100%'}} 
+                      name="" 
+                      label="Título" 
+                      type="text" 
+                      inputValue={title} 
+                      functionEdicion={setTitle}
+                      id=""/>
                     </Grid>
                     <Grid item>
-                      <Input sx={{width: '100%'}}  name="" label="Tags" type="text" id=""/>
+                      <Input sx={{width: '100%'}}  
+                      name="" 
+                      label="Tags" 
+                      type="text" 
+                      inputValue={tags} 
+                      functionEdicion={setTags}
+                      id=""/>
                     </Grid>
                     <Grid item>
-                      <Input sx={{width: '100%'}}  name="" label="Link" type="text" id=""/>
+                      <Input sx={{width: '100%'}}  
+                      name="" 
+                      label="Link" 
+                      type="text" 
+                      inputValue={url} 
+                      functionEdicion={setUrl}
+                      id=""/>
                     </Grid>
                     <Grid item>
-                      <Input sx={{width: '100%'}}  name="" label="Descrição" type="text" id="" multiline rows={4}/>
+                      <Input sx={{width: '100%'}}  
+                      name="" 
+                      label="Descrição" 
+                      type="text" 
+                      id="" 
+                      inputValue={description} 
+                      functionEdicion={setDescription}
+                      multiline rows={4}/>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -134,7 +161,7 @@ export default function FormProject() {
             </div>
 
             <div className={styles.box_btn}>
-              <Button className={styles.btn_save}
+              <Button onClick={() => buttonRegister()} className={styles.btn_save}
                 variant="contained" 
                 size="large">
                 Salvar

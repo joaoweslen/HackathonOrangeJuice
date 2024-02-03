@@ -1,6 +1,6 @@
 const { response } = require("express");
 const { connection, BUCKET } = require("./connection/connection");
-const { post } = require("../routes/portfolioRouter");
+import { format } from "date-fns";
 
 const db = connection.firestore();
 
@@ -46,8 +46,6 @@ const createPost = async (userName, title, tags, url, imageUrl, description, own
     const formattedDate = format(date, 'MM/yy');
   
     const postRef = db.collection("posts").doc(id);
-    const userRef = db.collection("users").doc(ownerId);
-    const userDoc = await userRef.get();
 
     const postToUpload = {
         "id": id,
@@ -62,9 +60,6 @@ const createPost = async (userName, title, tags, url, imageUrl, description, own
     }
   
     await postRef.set(postToUpload);
-    userRef.update({
-      ['posts']: connection.firestore.FieldValue.arrayUnion(id)
-    })
 
     return {postToUpload};
 }
@@ -111,7 +106,6 @@ const updateById = async (id, data, imageUrl) => {
     const postRef = db.collection("posts").doc(id);
     await postRef.update(data);
     const postDoc = await postRef.get();
-
     
     if(imageUrl) {
       const oldImage = postDoc.data().image;
@@ -134,15 +128,9 @@ const deleteById = async (id, ownerId) => {
 
     const startIndex = imageUrl.indexOf("/images/") + "/images/".length
     const filePath = imageUrl.substring(startIndex);
-    const userRef = db.collection("users").doc(ownerId);
-
 
     db.collection("posts").doc(id).delete();
     connection.storage().bucket().file("images/" + filePath).delete();
-
-    userRef.update({
-      ['posts']: connection.firestore.FieldValue.arrayRemove(id)
-    })
 
     return response.status(204);
 }

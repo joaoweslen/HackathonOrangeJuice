@@ -1,5 +1,7 @@
 const postModel = require('../models/postModel');
 
+const errorMessageDelete = { status: 404, message: 'Not found' };
+
 const registerService = async (userName, title, tags, url, imageUrl, description, ownerId) => {
     const response = await postModel.createPost(userName, title, tags, url, imageUrl, description, ownerId);
     // console.log(response)
@@ -26,8 +28,9 @@ const updateByIdService = async(id, data, imageUrl) => {
     return response;
 }
 
-const deleteByIdService = async (id, ownerId) => {
-    const response = await postModel.deleteById(id, ownerId);
+const deleteByIdService = async (id) => {
+    if(!id) throw errorMessageDelete;
+    const response = await postModel.deleteById(id);
     return response;
 }
 

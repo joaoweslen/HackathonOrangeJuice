@@ -3,22 +3,52 @@ import styles from "./projectContainer.module.css"
 import {Card, CardHeader, Box, CardMedia, CardContent, Typography, IconButton,
      Avatar, Menu, MenuList, MenuItem} from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
-import { requestDELETE, requestPUT } from '../../../utils/request'
+import { requestDELETE, requestPUT, setToken } from '../../../utils/request'
+import {useState, useEffect} from 'react';
 
 export default function ProjectContainer({data}:any) {
 
-    // async function buttonDelete() {
-    //     try {
-    //         await requestDELETE('/portfolio/' + data.id)
-    //     }
-    // }
+    
+    const [title, setTitle] = useState('');
+    const [tags, setTags] = useState([]);
+    const [url, setUrl] = useState('');
+    const [description, setDescription] = useState('');
+    const [image, setImage] = useState('');
+    const [postExists, setPostExists] = useState(false);
 
-    // async function buttonUpdate() {
-    //     try {
-    //         await requestPUT('/portfolio')
+    useEffect(() => {
+        setPostExists(false);
+        console.log(title, tags, url, description, image)
+      },[title, tags, url, description, image]);
 
-    //     }
-    // }
+    async function deleteById(postId:any) {
+        const token = JSON.parse(localStorage.getItem('token') || '');
+        setToken(token);
+        try {
+            await requestDELETE(`/portfolio/${postId}`);
+        } catch (e) {
+            console.error("Não foi possível excluir o portifólio.", e);
+        }
+    };
+
+    // Implementar PUT quando fazer aba do botao editar
+    async function updateById(postId:any, body:any) {
+        const token = JSON.parse(localStorage.getItem('token') || '');
+        setToken(token);
+        try {
+            await requestPUT({route:`/portfolio/${postId}`, 
+            body: {
+                title: title,
+                tags: tags,
+                url: url,
+                description: description,
+                image:image
+            }  
+        });
+        } catch (e) {
+            console.error("Não foi possível atualizar o portifólio.", e)
+        }
+    };
 
     const [anchorElEdit, setAnchorElEdit] = React.useState<null | HTMLElement>(null);
     const data1 = data;
@@ -35,22 +65,22 @@ export default function ProjectContainer({data}:any) {
   return (
 
     <div className={styles.box}>
-        {/* <IconButton className={styles.icon} size="small" onClick={handleOpenEdit}>
+        <IconButton className={styles.icon} size="small" onClick={handleOpenEdit}>
             <EditIcon />
-        </IconButton> */}
+        </IconButton>
 
         <Card elevation={0} sx={{ maxWidth: 345 }}>
-            {/* <Box >
+            <Box >
                 <Menu 
                     anchorEl={anchorElEdit}
                     open={Boolean(anchorElEdit)} 
                     onClose={handleCloseEdit}>
                     <MenuList>
                         <MenuItem>Editar</MenuItem>
-                        <MenuItem>Excluir</MenuItem>
+                        <MenuItem onClick={() => deleteById(data.id)}>Excluir</MenuItem>
                     </MenuList>
                 </Menu>
-            </Box> */}
+            </Box>
             
             <CardMedia
                 component="img"

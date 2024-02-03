@@ -42,8 +42,7 @@ const updateById = async (req, res) => {
 };
 
 const deleteById = async (req, res) => {
-    const ownerId = req.id;
-    const response = await portfolioService.deleteByIdService(req.params.id, ownerId);
+    const response = await portfolioService.deleteByIdService(req.params.id);
     res.json(response);
 };
 
