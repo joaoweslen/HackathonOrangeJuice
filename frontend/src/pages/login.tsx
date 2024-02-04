@@ -10,12 +10,9 @@ import Google from "@/assets/img/lg_google.png"
 import login_img from "@/assets/img/img_login.jpg"
 import Imagem from 'next/image'
 import '../assets/css/globals.css';
-
-//import { useNavigation } from "react-router-dom";
 import {useState, useEffect} from 'react';
 import { useRouter } from 'next/navigation';
 import {requestPOST, setToken, requestGET} from '../utils/request';
-
 
 export default function Login() {
     const { push } = useRouter();
