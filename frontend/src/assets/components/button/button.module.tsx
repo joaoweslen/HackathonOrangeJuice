@@ -1,9 +1,9 @@
-import styles from ".//button.module.css";
+import styles from "./button.module.css";
 
 export default function Button(props:any) {
     const minCharacterPassword = 6;
     const regex = /\S+@\S+\.\S+/;
-    const { Password, Email} = props;
+    const {Password, Email} = props;
     
     return (
         <input 
