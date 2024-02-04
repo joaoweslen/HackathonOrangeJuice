@@ -28,7 +28,6 @@ const registerService = async (data) => {
   const serializeUser = {  
     ...userExists,
   }
-  //console.log(serializeUser, userExists);
   return serializeUser;
 };
 

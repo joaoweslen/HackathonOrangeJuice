@@ -10,7 +10,6 @@ module.exports = (req, res, next) => {
     
     if (!authorization) return res.status(401).json({ message: 'Token not found' });
     const x = jwt.verify(authorization, jwtKey);
-    console.log(x)
     req.id = x.id;
     next();
   } catch (error) {

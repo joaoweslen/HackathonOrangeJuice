@@ -1,17 +1,21 @@
 const portfolioService = require('../services/portfolioService');
 
 const errorMessage = { status: 400, message: 'Bad Request!'};
+const errorMessageNotFoundUserOrTitle = { status: 400, message: 'Bad Request!, user or title'};
 
 const register = async(req, res) => {
+    console.log("controller")
     const {userName, title, tags, url, description} = req.body;
+    console.log("controller2",userName, title,)
     const ownerId = req.id;
     const { firebaseUrl } = req.file;
+    console.log("controller3")
     const imageUrl = firebaseUrl;
-
-    if (!userName | !title) throw errorMessage;
-
+    console.log("controller4")
+    if (!userName | !title) throw errorMessageNotFoundUserOrTitle;
+    console.log("controller5")
     const portfolioDoc = await portfolioService.registerService(userName, title, tags, url, imageUrl, description, ownerId);
-    // console.log(portfolioDoc.id)
+    console.log("controller6")
     res.status(200).json(portfolioDoc);
 }
 

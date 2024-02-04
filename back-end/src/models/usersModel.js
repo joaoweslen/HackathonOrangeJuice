@@ -68,7 +68,6 @@ const createUsers = async (data) => {
     const usersDoc = await usersRef.get(id);
     //if(!usersDoc.id) throw { status: 500 , message: "error server" };
     const dataResponseDb = usersDoc.data()
-    //console.log(usersDoc.data());
 
     return {
         id,

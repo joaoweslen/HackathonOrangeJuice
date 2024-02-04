@@ -19,9 +19,9 @@ export default function Home() {
    
     async function fetchData() {   
       try {
-        const dataToken = JSON.parse(localStorage.getItem('user') || '{}');
+        const token = JSON.parse(localStorage.getItem('token') || '{}');
         //console.log(dataToken.token)
-        setToken(dataToken.token);
+        setToken(token);
         const posts = await requestGET('/portfolio/userposts');
         setUserPosts(posts);
         console.log(posts)

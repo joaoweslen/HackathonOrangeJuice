@@ -1,11 +1,12 @@
 const { response } = require("express");
 const { connection, BUCKET } = require("./connection/connection");
 const { post } = require("../routes/portfolioRouter");
-
+const crypto = require('crypto');
+const { format } = require('date-fns');
 const db = connection.firestore();
 
 const uploadImage = async (req, res, next)  => {
-  
+  console.log("uploadImage")
   const image = req.file;
 
   if(image){ 
@@ -41,10 +42,14 @@ const uploadImage = async (req, res, next)  => {
 
 
 const createPost = async (userName, title, tags, url, imageUrl, description, ownerId) => {
+    //console.log(req)
     const id = crypto.randomUUID()+Date.now();
+    console.log("model 1")
     const date = new Date();
+    console.log("model 2")
     const formattedDate = format(date, 'MM/yy');
-  
+    console.log("model 3")
+    
     const postRef = db.collection("posts").doc(id);
     const userRef = db.collection("users").doc(ownerId);
     const userDoc = await userRef.get();

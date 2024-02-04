@@ -12,7 +12,10 @@ const httpErrorMiddleware = require('../middlewares/httpErrorMiddleware');
 const usersModel = require('../models/usersModel');
 
 // rota get /teste pra teste api
-app.get('/teste', (req, res) => res.status(200).json({ message: 'Olá Mundo! teste' }));
+app.post('/teste', (req, res) => {
+    req.file;
+    res.status(200).json({ data: req.body.userName })
+});
 
 // rota get /users pra teste de conexão com o firebase //
 app.get('/users', async (req, res) => {

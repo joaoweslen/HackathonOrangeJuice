@@ -11,11 +11,11 @@ import '../assets/css/globals.css';
 import Imagem from 'next/image'
 import {useState, useEffect} from 'react';
 import { requestPOST } from "@/utils/request";
-// import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 export default function Cadastro() {
 
-    // const { push } = useRouter();
+    const { push } = useRouter();
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -39,14 +39,18 @@ export default function Cadastro() {
             password
           }
         });
-        localStorage.setItem("data", JSON.stringify(reponseAPI))
-        // console.log(reponseAPI)
+        localStorage.setItem("user", JSON.stringify(reponseAPI))
+        const responseAPIlogin = await requestPOST({route: '/login', body: {email, password}});
+
+        localStorage.setItem('token', JSON.stringify(responseAPIlogin.token));
         setUsersCadSucces(true)
         setTimeout(() => {
           setUsersCadSucces(false)
-        }, 4000);
-        // push("/home");
+        }, 2000);
+        push("/home");
       }catch(e){
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
         setUsersExists(true);
       }
     }

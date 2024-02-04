@@ -38,7 +38,7 @@ export default function Login() {
         if(isLoged) {
           setTimeout(() => {
             push("/home");
-          }, 3000);
+          }, 2000);
         }
       },
       [isLoged,push]
@@ -50,14 +50,15 @@ export default function Login() {
       try {
         const userData = {email, password}
         const responseAPIlogin = await requestPOST({route: '/login', body: {email, password}});
-
+        console.log(responseAPIlogin.token);
+        
         localStorage.setItem('token', JSON.stringify(responseAPIlogin.token));
         setToken(responseAPIlogin.token);
+        //console.log(responseAPIlogin);
         const responseAPIvalidate = await requestGET('/login/validate');
         localStorage.setItem('user', JSON.stringify(responseAPIvalidate));
         setIsLoged(true);
 
-        //console.log(respnseAPI);
       } catch (e) {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
