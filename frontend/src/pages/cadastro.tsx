@@ -11,24 +11,65 @@ import '../assets/css/globals.css';
 import Imagem from 'next/image'
 import {useState, useEffect} from 'react';
 import { requestPOST } from "@/utils/request";
-// import { useRouter } from 'next/navigation';
 
 export default function Cadastro() {
-
-    // const { push } = useRouter();
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [usersExists, setUsersExists] = useState(false);
     const [usersCadSucces, setUsersCadSucces] = useState(false);
+    const [errorMessages, setErrorMessages] = useState({
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+    });
 
     useEffect(()=>{
       setUsersExists(false);
       // console.log(firstName,lastName,email,password)
     },[firstName,lastName,email,password]);
 
+    const validateForm = () => {
+      const errors = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+      };
+  
+      if (!firstName.trim()) {
+        errors.firstName = 'Campo Nome é obrigatório.';
+      }
+      if (!lastName.trim()) {
+        errors.lastName = 'Campo Sobrenome é obrigatório.';
+      }
+      if (!email.trim()) {
+        errors.email = 'Campo Email é obrigatório.';
+      } else if (!isValidEmail(email)) {
+        errors.email = 'Formato de e-mail inválido.';
+      }
+      if (!password.trim()) {
+        errors.password = 'Campo Senha é obrigatório.';
+      } else if (password.length < 6) {
+        errors.password = 'A senha deve ter pelo menos 6 caracteres.';
+      }
+  
+      setErrorMessages(errors);
+      return Object.values(errors).every((error) => !error);
+    };
+  
+    const isValidEmail = (email:any) => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    };
+
     async function buttonRegister() {
+      if (!validateForm()) {
+        return;
+      }
+
       try{
         const reponseAPI = await requestPOST({
           route: '/register',
@@ -75,6 +116,7 @@ export default function Cadastro() {
                       functionEdicion={setFirstName}
                       autoFocus
                     />
+                    <span className={styles.error}>{errorMessages.firstName}</span>
                   </div>
                   <div className={styles.half2}>
                     <Input 
@@ -86,6 +128,7 @@ export default function Cadastro() {
                       functionEdicion={setLastName}
                       autoFocus
                     />
+                    <span className={styles.error}>{errorMessages.lastName}</span>
                   </div>
                   <div className={styles.form}>
                     <Input name="email"
@@ -95,12 +138,14 @@ export default function Cadastro() {
                       functionEdicion={setEmail} 
                       autoFocus
                     />
+                    <span className={styles.error}>{errorMessages.email}</span>
                     <Password name="password" 
                       label="Password" 
                       inputValue={password} 
                       functionEdicion={setPassword} 
                       id="password"
                     />
+                    <span className={styles.error}>{errorMessages.password}</span>
                     <Button 
                       type="submit" 
                       value="CADASTRAR"

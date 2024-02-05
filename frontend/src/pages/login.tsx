@@ -21,9 +21,10 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const [faledTryLogin, setFaledTryLogin] = useState(false);
     const [isLoged, setIsLoged] = useState(false);
-    
-    const minCharacterPassword = 6;
-    const regex = /\S+@\S+\.\S+/;
+    const [errorMessages, setErrorMessages] = useState({
+      email: '',
+      password: '',
+    });
 
     useEffect(() => {
         setFaledTryLogin(false);
@@ -42,8 +43,35 @@ export default function Login() {
       [isLoged,push]
     );
 
+    const validateForm = () => {
+      const errors = {
+        email: '',
+        password: '',
+      };
+  
+      if (!email.trim()) {
+        errors.email = 'Email não pode ser vazio';
+      } else if (!isValidEmail(email)) {
+        errors.email = 'Formato de Email inválido.';
+      }
+      if (!password.trim()) {
+        errors.password = 'Senha não pode ser vazia';
+      }
+  
+      setErrorMessages(errors);
+      return Object.values(errors).every((error) => !error);
+    };
+
+    const isValidEmail = (email:any) => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    };
+
 
     async function butonLogin(){
+      if (!validateForm()) {
+        return;
+      }
 
       try {
         const userData = {email, password}
@@ -104,6 +132,7 @@ export default function Login() {
                   functionEdicion={setEmail} 
                   autoFocus
                 />
+                <span className={styles.error}>{errorMessages.email}</span>
                 <Password 
                   name="password" 
                   label="Password" 
@@ -111,6 +140,7 @@ export default function Login() {
                   inputValue={password} 
                   functionEdicion={setPassword} 
                 />
+                <span className={styles.error}>{errorMessages.password}</span>
                 <Button 
                   type="submit" 
                   value="ENTRAR"

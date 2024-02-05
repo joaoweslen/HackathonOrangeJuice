@@ -25,7 +25,7 @@
 .form{
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 8px;
 }
 
 .link, .text{
@@ -36,6 +36,12 @@
 
 .link:hover{
   text-decoration: underline;
+}
+
+.error{
+  font-size: 13px;
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  color: #c20202;
 }
 
 .div_img{
